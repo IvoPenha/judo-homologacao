@@ -1,0 +1,36 @@
+#cadastro {
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.25);
+    border-radius: 4px;
+
+    padding: 15px;
+    margin: 1vw;
+
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+#image-upload {
+    width: 100%;
+}
+
+#image-upload-actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+#bottom-nav {
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba($color: #000000, $alpha: 0.25);
+
+    z-index: 1;
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    overflow-y: auto;
+    padding: 8px 0;
+}

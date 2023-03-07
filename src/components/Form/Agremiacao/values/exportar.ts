@@ -1,0 +1,41 @@
+interface InitialValuesExportarAgremiacao {
+  Nome: boolean,
+  Sigla: boolean,
+  Fantasia: boolean,
+  Responsavel: boolean,
+  Representante: boolean,
+  DataFiliacao: boolean,
+  DataNascimento: boolean,
+  Cep: boolean,
+  Endereco: boolean,
+  Bairro: boolean,
+  Complemento: boolean,
+  Cidade: boolean,
+  Estado: boolean,
+  Pais: boolean,
+  Telefone: boolean,
+  Email: boolean,
+  Cnpj: boolean,
+  Regiao: boolean
+}
+
+export const values: InitialValuesExportarAgremiacao = {
+  Nome: false,
+  Sigla: false,
+  Fantasia: false,
+  Responsavel: false,
+  Representante: false,
+  DataFiliacao: false,
+  DataNascimento: false,
+  Cep: false,
+  Endereco: false,
+  Bairro: false,
+  Complemento: false,
+  Cidade: false,
+  Estado: false,
+  Pais: false,
+  Telefone: false,
+  Email: false,
+  Cnpj: false,
+  Regiao: false
+}
