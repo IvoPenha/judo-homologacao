@@ -21,11 +21,11 @@ async function getAgremiacao(id: number) {
   return response.data;
 }
 
-async function createAgremiacao(payload: IAgremiacao): Promise<IAgremiacao> {
+async function createAgremiacao(payload: any): Promise<IAgremiacao> {
   const formData = new FormData()
   Object.keys(payload).forEach(key => { // To pegando cada propriedade e mandando pro formData
     if (key == "Documentos")
-    payload[key].map(item => formData.append(key, item))
+    payload[key].map((item: any) => formData.append(key, item))
     else 
       formData.append(key, payload[key]);
   });
@@ -74,7 +74,7 @@ async function exportarAgremiacao(payload: any): Promise<any> {
   return response.data;
 }
 
-async function anexarArquivoAgremiacao(id: number, payload: File[]): Promise<any> {
+async function anexarArquivoAgremiacao(id: string, payload: File[]): Promise<any> {
   const formData = new FormData()
   payload.map((item)=>{
     formData.append('Documentos', item);
