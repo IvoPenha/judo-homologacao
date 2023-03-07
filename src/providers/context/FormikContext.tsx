@@ -160,7 +160,7 @@ export function FormikProvider({ children }: FormikProviderProps) {
       }
       //@ts-ignore
       const routeSelected = idForUpdate
-        ? agremiacaoRoutes.updateAgremiacao(values as any)
+        ? agremiacaoRoutes.updateAgremiacao(values, idForUpdate)
         : agremiacaoRoutes.createAgremiacao(values);
       const response = await routeSelected;
       AgremiacaoRegisterFormik.resetForm();

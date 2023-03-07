@@ -5,6 +5,7 @@ import { FormFilterAgremiacao } from "../Form/Agremiacao/FilterAgremiacao";
 
 import type { IAgremiacao, IFiltersAgremicao } from "../../models/AgremiacaoModel";
 
+import  '../../styles/global.scss'
 import { useFormikProvider } from "../../hooks/useFormikProvider";
 import { useModal } from "../../hooks/useModalProvider";
 
@@ -72,7 +73,7 @@ const [isLoading, setIsLoading] = useState(false)
 
 async function handleSubmit(){
   await handleFilterChange(filtersAgremiacao)
-  setTimeout(() => handleClose(),300)
+  setTimeout(handleClose(),300)
 }
   return (
     <Modal

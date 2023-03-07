@@ -117,15 +117,15 @@ export function ModalExportarAgremiacao() {
                       //@ts-ignore
                       checked={
                         isCheckAll
-                          ? true
-                          //@ts-ignore
-                          : formik.values[item.value] 
+                        //@ts-ignore
+                          ? (formik.values[item.value] = true) : formik.values[item.value]
                       }
                       onChange={
                         isCheckAll
                           ? () => {
                               handleDisCheckAll();
-                              false;
+                        //@ts-ignore
+                              formik.values[item.value] = false;
                             }
                           : (formik.handleChange as any)
                       }

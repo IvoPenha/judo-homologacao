@@ -72,7 +72,8 @@ export function FormFilterAgremiacao({
 
     setFiltersAgremiacao(newArrayFilters);
   };
-  function HandleRenderButtons({index} : any){
+
+  function HandleRenderButtons({index} : number){
     if (values) {
       return (
         <Box sx={{ display: "flex", alignItems: "center" }}>

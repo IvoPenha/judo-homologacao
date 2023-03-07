@@ -7,6 +7,8 @@ import { useFormik, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { useDebounce } from "../../../utils/useDebounce";
 
+import '../../../styles/global.scss'
+
 import { Modal } from "../index";
 import { Container, Stack, Button, TextField, DialogActions } from "@mui/material";
 import { 
@@ -38,7 +40,7 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
       anotacoes: '',
     },
     validationSchema: Yup.object().shape({
-      anotacoes: Yup.string().trim().required('Campo obrigatório'),
+      anotacoes: Yup.string().notRequired(),
     }),
     onSubmit: (values) => {
       if (isRegister) {
@@ -78,7 +80,8 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
   }
 
   function handleSubmit() {
-    console.log(content)
+    setNotes(content);
+    handleClose();
   }
 
   return (
@@ -101,7 +104,7 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
               onChange={handleChange}
               //onBlur={formik.handleBlur}
               style={{
-                width: '100%'
+                width: '100%',
               }}
             />
             
@@ -135,8 +138,9 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
               <Button
                 variant="contained"
                 color="primary"
-                type="submit"
+                type="button"
                 disabled={isLoading}
+                onClick={handleSubmit}
                 startIcon={<CheckIcon />}
                 size="medium"
                 sx={{ minWidth: "120px", textTransform: "none" }}

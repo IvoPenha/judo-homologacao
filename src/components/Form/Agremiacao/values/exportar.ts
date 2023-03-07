@@ -10,13 +10,13 @@ interface InitialValuesExportarAgremiacao {
   Endereco: boolean,
   Bairro: boolean,
   Complemento: boolean,
-  Cidade: boolean,
-  Estado: boolean,
-  Pais: boolean,
+  CidadeNome: boolean,
+  EstadoNome: boolean,
+  PaisNome: boolean,
   Telefone: boolean,
   Email: boolean,
   Cnpj: boolean,
-  Regiao: boolean
+  RegiaoNome: boolean
 }
 
 export const values: InitialValuesExportarAgremiacao = {
@@ -31,11 +31,11 @@ export const values: InitialValuesExportarAgremiacao = {
   Endereco: false,
   Bairro: false,
   Complemento: false,
-  Cidade: false,
-  Estado: false,
-  Pais: false,
+  CidadeNome: false,
+  EstadoNome: false,
+  PaisNome: false,
   Telefone: false,
   Email: false,
   Cnpj: false,
-  Regiao: false
+  RegiaoNome: false
 }

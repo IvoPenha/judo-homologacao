@@ -35,7 +35,7 @@ export interface IAgremiacao {
   contratoSocial: File | string | null,
   documentacaoAtualizada: File | string | null,
   regiao: Agremiacaolocation,
-  anotacoes: string,
+  anotacoes?: string,
   Documentos: []
 }
 

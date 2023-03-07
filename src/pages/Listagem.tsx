@@ -10,7 +10,7 @@ import {
   GridValueGetterParams,
   useGridApiRef,
 } from "@mui/x-data-grid";
-import { CreateOutlined as EditIcon } from "@mui/icons-material";
+import { AddOutlined, CreateOutlined as EditIcon, Filter, FilterAlt, FilterAltOff, NoteAddOutlined, PlusOneOutlined, UploadFile } from "@mui/icons-material";
 
 import {
   Search,
@@ -226,19 +226,18 @@ export function Listagem() {
       component="main"
       sx={{
         flexGrow: 1,
-        height: "80vh",
         marginTop: 5,
       }}
     >
-      <Container maxWidth={false}>
-        <Grid container spacing={1}>
+      <Container maxWidth={false} >
+        <Grid container spacing={1} >
           <TabsAgremiacao />
-          <Grid item xs={12}>
+          <Grid item xs={12} >
             <TabPanel value={valueTab} index={2}>
               <Home />
             </TabPanel>
             <TabPanel value={valueTab} index={0}>
-              <Box sx={{ width: "100%", backgroundColor: "#FFF" }}>
+              <Box sx={{ width: "100%", backgroundColor: "#FFF", height: '77vh' }} >
                 {data?.itens ? (
                   <DataGrid
                     rows={
@@ -259,7 +258,7 @@ export function Listagem() {
                     paginationMode="server"
                     experimentalFeatures={{ newEditingApi: true }}
                     style={{
-                      height: "70vh",
+                      height: "76vh",
                     }}
                   />
                 ) : null}
@@ -317,19 +316,19 @@ export function Listagem() {
 
                   onClick={() => navigate("cadastro", { replace: true })}
                 >
-                  Novo
+                 <AddOutlined/> Novo
                 </Button>
                 <Button
                   // disabled
                   onClick={() => handleClickOpen(4)}
                 >
-                  Exportar
+                  <UploadFile/> Exportar
                 </Button>
                 <Button
                   onClick={() => handleClickOpen(1)}
                   // disabled
                 >
-                  Filtrar
+                  <FilterAlt/> Filtrar
                 </Button>
                 <Button disabled sx={{ marginRight: 3 }}>
                   Voltar
