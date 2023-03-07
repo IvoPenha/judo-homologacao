@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 const { 'judo-auth-token': token } = parseCookies();
 
 const api = axios.create({
-  baseURL: process.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 if (token) {
