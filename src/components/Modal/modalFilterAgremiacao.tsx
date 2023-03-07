@@ -73,7 +73,8 @@ const [isLoading, setIsLoading] = useState(false)
 
 async function handleSubmit(){
   await handleFilterChange(filtersAgremiacao)
-  setTimeout(handleClose(),300)
+  
+  setTimeout(() => handleClose(),300)
 }
   return (
     <Modal

@@ -72,8 +72,8 @@ export function FormFilterAgremiacao({
 
     setFiltersAgremiacao(newArrayFilters);
   };
-
-  function HandleRenderButtons({index} : number){
+  //@ts-ignore
+  function HandleRenderButtons({index} ?: number){
     if (values) {
       return (
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -290,6 +290,7 @@ export function FormFilterAgremiacao({
           </TextField>
 
           <HandleRenderButtons />
+          
         </Stack>
       </form>
     );
@@ -535,7 +536,6 @@ export function FormFilterAgremiacao({
               )
             )}
           </TextField>
-
           <HandleRenderButtons/>
         </Stack>
       </form>

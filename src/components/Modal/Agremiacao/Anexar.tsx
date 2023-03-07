@@ -84,6 +84,7 @@ export function ModalAnexosAgremiacao() {
   }
   useEffect(()=>{
     if(id){
+      //@ts-ignore
       anexarArquivoAgremiacao(id, currentFileToCreate)
     }
   }, [ currentFileToCreate ])
