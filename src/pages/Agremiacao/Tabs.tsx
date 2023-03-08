@@ -19,7 +19,7 @@ export function TabsAgremiacao() {
   };
 
   return (
-    <Grid item xs={12} sx={{  }}>
+    <Grid item xs={11} sx={{  }}>
       <Tabs
         value={valueTab}
         onChange={handleChange}

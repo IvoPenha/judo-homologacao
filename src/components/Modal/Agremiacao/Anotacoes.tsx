@@ -21,6 +21,7 @@ import { useAlertContext } from "../../../hooks/useAlertProvider";
 import { useModal } from "../../../hooks/useModalProvider";
 import { useFormikProvider } from "../../../hooks/useFormikProvider";
 import { agremiacaoRoutes } from "../../../providers/services/api/agremiacao";
+import { useParams } from "react-router";
 
 
 interface ModalAnotacoesAgremiacaoProps {
@@ -35,43 +36,11 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
   const { emitAlertMessage } = useAlertContext();
   const { setNotes } = useFormikProvider();
 
-  const formik = useFormik({
-    initialValues: {
-      anotacoes: '',
-    },
-    validationSchema: Yup.object().shape({
-      anotacoes: Yup.string().notRequired(),
-    }),
-    onSubmit: (values) => {
-      if (isRegister) {
-        console.log('is register', isRegister)
-        setNotes(values.anotacoes);
-        console.log('values', values)
-        return handleClose();
-      }
-      mutate();
-
-    },
-  });
-
+ 
   useEffect(() => {
-    formik.setFieldValue('anotacoes', currentNotes)
+    
   }, [currentNotes])
 
-  const { isLoading, mutate } = useMutation(
-    () => agremiacaoRoutes.anotacoesAgremiacao(agremiacaoId, formik.values),
-    {
-      onSuccess: () => {
-        //@ts-ignore
-        queryClient.invalidateQueries('agremiacao-list');
-        handleClose();
-      },
-      onError: () => {
-        emitAlertMessage("error", "Erro ao salvar as anotações");
-        // handleClose();
-      }
-    }
-  )
 
   const [content, setContent] = useState('');
 
@@ -79,7 +48,14 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
     setContent(value);
   }
 
+  
+  const { id } = useParams<{ id: string }>();
+  
   function handleSubmit() {
+    if(id){
+      //@ts-ignore
+      agremiacaoRoutes.anotacoesAgremiacao(id, 'alo '+content.toString())
+    }
     setNotes(content);
     handleClose();
   }
@@ -101,6 +77,7 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
               id="anotacoes"
               className="anotacoesTextfield"
               value={content}
+              defaultValue={agremiacaoId ? '<p>aa<p/>' : ''}
               onChange={handleChange}
               //onBlur={formik.handleBlur}
               style={{
@@ -139,15 +116,12 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
                 variant="contained"
                 color="primary"
                 type="button"
-                disabled={isLoading}
                 onClick={handleSubmit}
                 startIcon={<CheckIcon />}
                 size="medium"
                 sx={{ minWidth: "120px", textTransform: "none" }}
               >
-                {
-                  isLoading ? 'Salvando...' : 'Ok'
-                }
+                  Ok
               </Button>
               <Button
                 variant="contained"

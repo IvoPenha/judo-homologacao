@@ -61,39 +61,39 @@ export function FormFilterAgremiacao({
     },
   });
 
-  const handleRemoveFilter = (itemIndex? : number) => {
-    
-    const newArrayFilters = filtersAgremiacao.filter(
-      (_, index) => {
-        index !== itemIndex
-        console.log(indexValues + 'indexvalues')
-      }
-    );
+  const handleRemoveFilter = () => {
+    const newArrayFilters = filtersAgremiacao.filter((_, index) => index !== indexValues);
 
     setFiltersAgremiacao(newArrayFilters);
-  };
-  //@ts-ignore
-  function HandleRenderButtons(index?: number){
+  }
+  useEffect(()=> {
+    console.log(filtersAgremiacao)
+  },[filtersAgremiacao])
+
+  const HandleRenderButtons = () => {
     if (values) {
       return (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Close sx={{ cursor: "pointer" }} onClick={() => handleRemoveFilter(index)} />
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Close
+            sx={{ cursor: 'pointer' }}
+            onClick={handleRemoveFilter}
+          />
         </Box>
-      );
+      )
     }
     return (
-      <Box display="flex" alignItems="center" sx={{ gap: 2 }}>
+      <Box display='flex' alignItems='center' sx={{ gap: 2 }}>
         <Add
-          sx={{ color: "green", cursor: "pointer" }}
+          sx={{ color: 'green', cursor: 'pointer' }}
           onClick={(e: any) => formik.handleSubmit(e)}
         />
         <Close
-          sx={{ color: "red", cursor: "pointer" }}
+          sx={{ color: 'red', cursor: 'pointer' }}
           onClick={(e: any) => formik.handleReset(e)}
         />
       </Box>
     );
-  };
+  }
 
   const HandleRenderForm = () => {
     return (
@@ -102,200 +102,159 @@ export function FormFilterAgremiacao({
           spacing={2}
           direction="row"
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent='space-between'
           sx={{
-            m: 2,
+            m: 2
           }}
         >
           <TextField
             select
             variant="outlined"
-            name="initialParentheses"
-            id="initialParentheses"
-            value={
-              values?.initialParentheses ?? formik.values["initialParentheses"]
-            }
+            name='initialParentheses'
+            id='initialParentheses'
+            value={values?.initialParentheses ?? formik.values['initialParentheses']}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched["initialParentheses"] &&
-              Boolean(formik.errors["initialParentheses"])
-            }
-            helperText={
-              formik.touched["initialParentheses"] &&
-              formik.errors["initialParentheses"]
-            }
+            error={formik.touched['initialParentheses'] && Boolean(formik.errors['initialParentheses'])}
+            helperText={formik.touched['initialParentheses'] && formik.errors['initialParentheses']}
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
           >
-            {AgremiacaoOptions.AgremiacaoParenthesesValues.initial.map(
-              (parentheses: { value: string; label: string }) => (
-                <MenuItem value={parentheses.value} key={parentheses.value}>
-                  {parentheses.label}
-                </MenuItem>
-              )
-            )}
+            {
+              AgremiacaoOptions.AgremiacaoParenthesesValues
+                .initial.map((parentheses: { value: string, label: string }) => (
+                  <MenuItem value={parentheses.value}>{parentheses.label}</MenuItem>
+                ))
+            }
           </TextField>
 
           <TextField
             select
             variant="outlined"
             label="Campo"
-            name="column"
-            id="column"
-            value={values?.column ?? formik.values["column"]}
+            name='column'
+            id='column'
+            value={values?.column ?? formik.values['column']}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.touched["column"] && Boolean(formik.errors["column"])}
-            helperText={formik.touched["column"] && formik.errors["column"]}
+            error={formik.touched['column'] && Boolean(formik.errors['column'])}
+            helperText={formik.touched['column'] && formik.errors['column']}
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
           >
-            {AgremiacaoOptions.AgremiacaoHeaderValues.map((item) => (
-              <MenuItem value={item.value} key={item.value}>
-                {item.label}
-              </MenuItem>
-            ))}
+            {
+              AgremiacaoOptions.AgremiacaoHeaderValues.map((item) => (
+                <MenuItem value={item.value}>{item.label}</MenuItem>
+              ))
+            }
           </TextField>
 
           <TextField
             select
             variant="outlined"
             label="Operador"
-            name="operator"
-            id="operator"
-            value={formik.values["operator"]}
+            name='operator'
+            id='operator'
+            value={values?.operator ?? formik.values['operator']}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched["operator"] && Boolean(formik.errors["operator"])
-            }
-            helperText={formik.touched["operator"] && formik.errors["operator"]}
+            error={formik.touched['operator'] && Boolean(formik.errors['operator'])}
+            helperText={formik.touched['operator'] && formik.errors['operator']}
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
           >
-            {AgremiacaoOptions.AgremiacaoOperatorsValues.operator.map(
-              (operator) => (
-                <MenuItem value={operator.value} key={operator.value}>
-                  {operator.label}
-                </MenuItem>
-              )
-            )}
+            {
+              AgremiacaoOptions.AgremiacaoOperatorsValues
+                .operator.map((operator) => (
+                  <MenuItem value={operator.value}>{operator.label}</MenuItem>
+                ))
+            }
           </TextField>
 
           <TextField
-            type="text"
+            type='text'
             variant="outlined"
-            label="Valor 1"
-    
-            name="firstValue"
-            id="firstValue"
-            
-            value={(values?.firstValue ?? formik.values["firstValue"])}
+            label='Valor 1'
+            name='firstValue'
+            id='firstValue'
+            value={values?.firstValue ?? formik.values['firstValue']}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched["firstValue"] &&
-              Boolean(formik.errors["firstValue"])
-            }
-            helperText={
-              formik.touched["firstValue"] && formik.errors["firstValue"]
-            }
+            error={formik.touched['firstValue'] && Boolean(formik.errors['firstValue'])}
+            helperText={formik.touched['firstValue'] && formik.errors['firstValue']}
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
           />
 
           <TextField
-            type="text"
+            type='text'
             variant="outlined"
             label="Valor 2"
-            name="secondValue"
-            id="secondValue"
-            value={values?.secondValue ?? formik.values["secondValue"]}
+            name='secondValue'
+            id='secondValue'
+            value={values?.secondValue ?? formik.values['secondValue']}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched["secondValue"] &&
-              Boolean(formik.errors["secondValue"])
-            }
-            helperText={
-              formik.touched["secondValue"] && formik.errors["secondValue"]
-            }
+            error={formik.touched['secondValue'] && Boolean(formik.errors['secondValue'])}
+            helperText={formik.touched['secondValue'] && formik.errors['secondValue']}
             sx={{ width: 150 }}
             fullWidth
-            disabled={
-              formik.values["operator"] !== "ENTRE" || values !== undefined
-            }
+            disabled={formik.values['operator'] !== 'ENTRE' || values !== undefined}
           />
 
           <TextField
             select
             variant="outlined"
-            name="finalParentheses"
-            id="finalParentheses"
-            value={
-              values?.finalParentheses ?? formik.values["finalParentheses"]
-            }
+            name='finalParentheses'
+            id='finalParentheses'
+            value={values?.finalParentheses ?? formik.values['finalParentheses']}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched["finalParentheses"] &&
-              Boolean(formik.errors["finalParentheses"])
-            }
-            helperText={
-              formik.touched["finalParentheses"] &&
-              formik.errors["finalParentheses"]
-            }
+            error={formik.touched['finalParentheses'] && Boolean(formik.errors['finalParentheses'])}
+            helperText={formik.touched['finalParentheses'] && formik.errors['finalParentheses']}
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
           >
-            {AgremiacaoOptions.AgremiacaoParenthesesValues.final.map(
-              (parentheses) => (
-                <MenuItem value={parentheses.value}>
-                  {parentheses.label}
-                </MenuItem>
-              )
-            )}
+            {
+              AgremiacaoOptions.AgremiacaoParenthesesValues
+                .final.map((parentheses) => (
+                  <MenuItem value={parentheses.value}>{parentheses.label}</MenuItem>
+                ))
+            }
           </TextField>
 
           <TextField
             select
             variant="outlined"
-            name="logicOperator"
-            id="logicOperator"
-            value={values?.logicOperator ?? formik.values["logicOperator"]}
+            name='logicOperator'
+            id='logicOperator'
+            value={values?.logicOperator ?? formik.values['logicOperator']}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched["logicOperator"] &&
-              Boolean(formik.errors["logicOperator"])
-            }
-            helperText={
-              formik.touched["logicOperator"] && formik.errors["logicOperator"]
-            }
+            error={formik.touched['logicOperator'] && Boolean(formik.errors['logicOperator'])}
+            helperText={formik.touched['logicOperator'] && formik.errors['logicOperator']}
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
           >
-            {AgremiacaoOptions.AgremiacaoOperatorsValues.logicOperator.map(
-              (operator) => (
-                <MenuItem value={operator.value}>{operator.label}</MenuItem>
-              )
-            )}
+            {
+              AgremiacaoOptions.AgremiacaoOperatorsValues
+                .logicOperator.map((operator) => (
+                  <MenuItem value={operator.value}>{operator.label}</MenuItem>
+                ))
+            }
           </TextField>
 
-          {/*@ts-ignore */}
           <HandleRenderButtons />
-          
         </Stack>
       </form>
     );
-  };
+  }
 
   useEffect(() => {
     const a = formik.getFieldProps("initialParentheses").value;

@@ -245,7 +245,7 @@ export function CadastroAgremiacao() {
         id="cadastro"
         style={{
           marginTop: id !== undefined ? 40 : 0,
-          height: id !== undefined ? "80vh" : "82vh",
+          height: id !== undefined ? "77vh" : "80vh",
         }}
       >
         <Grid container spacing={2} sx={{ display: "flex" }}>
@@ -1011,6 +1011,8 @@ export function CadastroAgremiacao() {
             e.preventDefault();
             handleClickOpen(3);
           }}
+        disabled = {Object.keys(formik.errors).length> 1 || isValid}
+
           // disabled
         >
           <AttachFileOutlinedIcon />

@@ -135,9 +135,9 @@ const AgremiacaoExportValues = [
   { value: 'Endereco', label: 'Endereço' },
   { value: 'Bairro', label: 'Bairro' },
   { value: 'Complemento', label: 'Complemento' },
-  { value: 'Cidade', label: 'Cidade' },
-  { value: 'Estado', label: 'Estado' },
-  { value: 'Pais', label: 'País' },
+  { value: 'idCidade', label: 'Cidade' },
+  { value: 'idEstado', label: 'Estado' },
+  { value: 'idPais', label: 'País' },
   { value: 'Telefone', label: 'Telefone' },
   { value: 'Email', label: 'Email' },
   { value: 'Cnpj', label: 'Cnpj' },
@@ -149,7 +149,7 @@ const AgremiacaoExportValues = [
   // { value: 'estatuto', label: 'Estatuto' },
   // { value: 'contratoSocial', label: 'Contrato Social' },
   // { value: 'documentacaoAtualizada', label: 'Documentação Atualizada' },
-  { value: 'Regiao', label: 'Região' },
+  { value: 'idRegiao', label: 'Região' },
   // { value: 'anotacoes', label: 'Anotações' },
 ]
 

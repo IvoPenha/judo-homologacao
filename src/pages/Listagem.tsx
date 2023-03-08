@@ -237,7 +237,7 @@ export function Listagem() {
               <Home />
             </TabPanel>
             <TabPanel value={valueTab} index={0}>
-              <Box sx={{ width: "100%", backgroundColor: "#FFF", height: '77vh' }} >
+              <Box sx={{ width: "97%", backgroundColor: "#FFF", height: {xl: '77vh', sm: '72vh', xs: '69vh'}, flexGrow: 2, position: 'absolute', zIndex: 2 }} >
                 {data?.itens ? (
                   <DataGrid
                     rows={
@@ -258,7 +258,7 @@ export function Listagem() {
                     paginationMode="server"
                     experimentalFeatures={{ newEditingApi: true }}
                     style={{
-                      height: "76vh",
+                      height: "100%",
                     }}
                   />
                 ) : null}
@@ -303,8 +303,9 @@ export function Listagem() {
                   backgroundColor: "#F5F5F5",
                   display: "flex",
                   justifyContent: "right",
-                  py: 2,
+                  py: '6px',
                   gap: "1rem",
+                  maxHeight:'8vh' ,
                   position: "absolute",
                   width: "100%",
                   left: 0,

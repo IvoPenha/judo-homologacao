@@ -69,8 +69,9 @@ type AnotacaoObject = {
 
 async function anotacoesAgremiacao(
   id: number,
-  anotacao: AnotacaoObject
-): Promise<void> {
+  anotacao: string
+): Promise<void> 
+{
   const response = await api.patch(`/gerencia/agremiacao/${id}`, anotacao);
 
   return response.data;
