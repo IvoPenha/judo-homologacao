@@ -31,7 +31,7 @@ import { StyledButton as Button } from "../components/Button";
 import api from "../providers/services/api";
 import { agremiacaoRoutes } from "../providers/services/api/agremiacao";
 import { TabsAgremiacao } from "./Agremiacao/Tabs";
-
+import parse from 'html-react-parser';
 export function Listagem() {
   document.title = "Listagem de Agremiação";
   const navigate = useNavigate();
@@ -214,7 +214,8 @@ export function Listagem() {
       valueGetter: ({ value }) =>
         valuesFiltered.length == 0 ? value?.descricao : value,
     },
-    { field: "anotacoes", headerName: "Anotações", width: 500 },
+    { field: "anotacoes", headerName: "Anotações", width: 500,valueFormatter: item => item.value != null ? item.value : ''  ,renderCell: (params) => params ?  parse(params.formattedValue) : '',
+ },
   ];
   const [listaAgremiacao, setListaAgremiacao] = useState([{}]);
   useEffect(() => {

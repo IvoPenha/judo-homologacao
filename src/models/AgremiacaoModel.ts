@@ -58,6 +58,7 @@ type AgremiacaoParenthesesType = {
 
 type AgremiacaoOperatorType = {
   operator: Array<{ value: Operator, label: Operator }>
+  operatorData: Array<{ value: Operator, label: Operator }>
   logicOperator: Array<{ value: LogicOperator, label: LogicOperator | 'vazio' }>;
 };
 
@@ -107,6 +108,15 @@ const AgremiacaoParenthesesValues: AgremiacaoParenthesesType = {
 const AgremiacaoOperatorsValues: AgremiacaoOperatorType = {
   operator: [
     { value: 'CONTEM', label: 'CONTEM' },
+    { value: '=', label: '=' },
+    { value: '#', label: '#' },
+    { value: '<', label: '<' },
+    { value: '<=', label: '<=' },
+    { value: '>', label: '>' },
+    { value: '>=', label: '>=' },
+    { value: 'ENTRE', label: 'ENTRE' },
+  ],
+  operatorData: [
     { value: '=', label: '=' },
     { value: '#', label: '#' },
     { value: '<', label: '<' },

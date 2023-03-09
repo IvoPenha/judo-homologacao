@@ -98,13 +98,9 @@ export function CadastroAgremiacao() {
         if (!("erro" in data)) {
           formik.setFieldValue("endereco", data.logradouro);
           formik.setFieldValue("bairro", data.bairro);
-          formik.setFieldValue("idCidade", data.localidade);
-          formik.setFieldValue("idEstado", data.uf);
         } else {
           formik.setFieldValue("endereco", "");
           formik.setFieldValue("bairro", "");
-          formik.setFieldValue("idCidade", "");
-          formik.setFieldValue("idEstado", "");
         }
       });
   };
@@ -136,8 +132,12 @@ export function CadastroAgremiacao() {
 
   const handleRoutes = () => {
     if (id) {
-      const valuesToPost = { ...formik.values, anotacoes: notes };
-      console.log("update this");
+      const valuesToPost = {
+        ...formik.values,
+        anotacoes: notes,
+      };
+  
+      console.log("update this" + currentFileToCreate);
       //@ts-ignore
       return agremiacaoRoutes.updateAgremiacao(valuesToPost);
     }
@@ -181,6 +181,7 @@ export function CadastroAgremiacao() {
   const handleUpdateFormikRegisterValues = async () => {
     if (id === undefined) return;
     const response = await agremiacaoRoutes.getAgremiacao(id);
+    console.log(response)
     if (response.foto) {
       const client = new BlockBlobClient(response.foto);
       const blob = await client.download();
@@ -233,6 +234,10 @@ export function CadastroAgremiacao() {
       }
     });
   };
+  useEffect(()=>{
+    console.log(avatarPreview);
+    
+  },[avatarPreview])
 
   return (
     <form
@@ -322,22 +327,26 @@ export function CadastroAgremiacao() {
                 </IconButton>
               </InputLabel>
 
-
-              <InputLabel htmlFor="button" sx={{ color: "black" }}>
+{/* 
+              <InputLabel htmlFor="button" sx={{ color: "black" }} >
                 <Input
                   type="button"
                   id="foto"
                   name="foto"
-                  onClick={(e) => {
+                  onClick={() => {
+                    console.log('oi')
+                    setAvatarPreview(AvatarDefault);
                     formik.setFieldValue("foto",  null );
                   }}
                   sx={{ display: "none" }}
-                />
+                /> */}
 
-                <IconButton aria-label="upload picture" component="span">
+                <IconButton aria-label="upload picture" component="span" onClick={()=> {
+                  setAvatarPreview(AvatarDefault)
+                  formik.setFieldValue('foto',null)}
+                  }>
                 <DeleteOutlineOutlinedIcon />
                 </IconButton>
-              </InputLabel>
 
             </div>
           </Grid>

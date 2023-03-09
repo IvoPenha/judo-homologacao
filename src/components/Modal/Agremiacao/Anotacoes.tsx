@@ -50,12 +50,24 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
 
   
   const { id } = useParams<{ id: string }>();
-  
+  const handleUpdateFormikRegisterValues = async () => {
+    if (id === undefined) return;
+    //@ts-ignore
+    const response = await agremiacaoRoutes.getAgremiacao(id);
+   
+    // console.log('response edit', response)
+    setContent(response.anotacoes)
+  };
+
+  useEffect(()=>{
+    handleUpdateFormikRegisterValues()
+  },[])
+
   function handleSubmit() {
-    if(id){
-      //@ts-ignore
-      agremiacaoRoutes.anotacoesAgremiacao(id, 'alo '+content.toString())
-    }
+    // if(id){
+    //   //@ts-ignore
+    //   agremiacaoRoutes.anotacoesAgremiacao(id, 'alo '+content.toString())
+    // }
     setNotes(content);
     handleClose();
   }
@@ -77,7 +89,6 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
               id="anotacoes"
               className="anotacoesTextfield"
               value={content}
-              defaultValue={agremiacaoId ? '<p>aa<p/>' : ''}
               onChange={handleChange}
               //onBlur={formik.handleBlur}
               style={{

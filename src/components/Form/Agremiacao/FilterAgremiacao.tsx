@@ -273,12 +273,21 @@ export function FormFilterAgremiacao({
     }
   }, [formik.values["initialParentheses"]]);
   
+  useEffect(() => {
+    if(
+    formik.values["column"] == "DataCnpj" ||
+    formik.values["column"] == "DataAta" ||
+    formik.values["column"] == "DataFiliacao" ||
+    formik.values["column"] == "DataNascimento"
+    ){
+
+    }
+  }, [formik.values["column"]]);
 
   const [isColumnDate, setisColumnDate] = useState(false)
   const [isColumnNumber, setIsColumnNumber] = useState(false)
   useEffect(() => {
     const a = formik.getFieldProps("column").value; 
-    
     if(
       a == "DataCnpj" ||
       a == "DataAta" ||
@@ -384,11 +393,19 @@ export function FormFilterAgremiacao({
             fullWidth
             disabled={values !== undefined}
           >
-            {AgremiacaoOptions.AgremiacaoOperatorsValues.operator.map(
+            {
+              !isColumnDate ?
+              AgremiacaoOptions.AgremiacaoOperatorsValues.operator.map(
+                (operator) => (
+                  <MenuItem value={operator.value}>{operator.label}</MenuItem>
+                )
+            ) : AgremiacaoOptions.AgremiacaoOperatorsValues.operatorData.map(
               (operator) => (
                 <MenuItem value={operator.value}>{operator.label}</MenuItem>
               )
-            )}
+          )
+          
+            }
           </TextField>
 
           <TextField
