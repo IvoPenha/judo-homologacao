@@ -11,6 +11,9 @@ async function getAgremiacoes(filters?: any): Promise<Page<IAgremiacao>> {
 
   return response.data;
 }
+async function postClearFilters(){
+  api.post('/gerencia/agremiacao/limpar-filtro')
+}
 
 async function postAgremiacaoFilter(payload: any): Promise<Page<IAgremiacao>> {
   console.log(payload);
@@ -124,4 +127,5 @@ export const agremiacaoRoutes = {
   anotacoesAgremiacao,
   exportarAgremiacao,
   anexarArquivoAgremiacao,
+  postClearFilters
 };

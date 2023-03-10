@@ -84,6 +84,40 @@ export function FormikProvider({ children }: FormikProviderProps) {
     verifyToken();
   }, []);
 
+
+  const filterWithZeroReturn = {
+      id: 1, 
+      sigla: 'Sem Correspondencia',
+      nome: 'Sem Correspondencia',
+      fantasia: 'Sem Correspondencia',
+      responsavel: 'Sem Correspondencia',
+      representante: 'Sem Correspondencia',
+      dataFiliacao: new Date(),
+      dataNascimento:  new Date(),
+      cep:  'Sem Correspondencia',
+      endereco:  'Sem Correspondencia',
+      bairro:  'Sem Correspondencia',
+      complemento:  'Sem Correspondencia',
+      cidade: 'Sem Correspondencia',
+      estado: 'Sem Correspondencia',
+      pais: 'Sem Correspondencia',
+      telefone:  'Sem Correspondencia',
+      email:  'Sem Correspondencia',
+      cnpj:  'Sem Correspondencia',
+      inscricaoMunicipal: 'Sem Correspondencia',
+      inscricaoEstadual:  'Sem Correspondencia',
+      dataCnpj:  new Date(),
+      dataAta:  new Date(),
+      foto:  'Sem Correspondencia',
+      alvaraLocacao:  'Sem Correspondencia',
+      estatuto:  'Sem Correspondencia',
+      contratoSocial:  'Sem Correspondencia',
+      documentacaoAtualizada:  'Sem Correspondencia',
+      regiao:  'Sem Correspondencia',
+      Documentos: []
+    
+  }
+
   const AgremiacaoFilterFormik = useFormik({
     validateOnChange: false,
     initialValues: {
@@ -207,7 +241,7 @@ export function FormikProvider({ children }: FormikProviderProps) {
         };
       }
     }
-
+    console.log('filters', filters)
     filters.map((filter) => {
       setFiltersToPost((old) =>
         old.length == 0
@@ -230,7 +264,12 @@ export function FormikProvider({ children }: FormikProviderProps) {
       const response = await agremiacaoRoutes.postAgremiacaoFilter(
         filtersToPost
       );
-      setValuesFiltered(response.itens);
+      if(response.itens.length == 0){
+        setValuesFiltered([{...filterWithZeroReturn}])
+      } else{
+        setValuesFiltered(response.itens);
+
+      }
     }
     atribuittingApiValue();
 

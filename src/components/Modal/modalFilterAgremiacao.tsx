@@ -72,7 +72,8 @@ export function ModalFilterAgremiacao() {
 const [isLoading, setIsLoading] = useState(false)
 
 async function handleSubmit(){
-  await handleFilterChange(filtersAgremiacao)
+  setFiltersToPost([])
+  await handleFilterChange(filtersAgremiacao.filter((value, index, self) => self.indexOf(value) === index))
   
   setTimeout(() => handleClose(),300)
 }
