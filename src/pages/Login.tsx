@@ -25,8 +25,8 @@ export function Login() {
 
   const formik = useFormik({
     initialValues: {
-      email: 'Augusto@email.com',
-      senha: 'augusto',
+      email: 'ivo@email.com',
+      senha: '29042001',
     },
     validationSchema: yup.object().shape({
       email: yup.string()
