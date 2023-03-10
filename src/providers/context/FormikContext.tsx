@@ -265,6 +265,7 @@ export function FormikProvider({ children }: FormikProviderProps) {
         filtersToPost
       );
       if(response.itens.length == 0){
+        // @ts-ignore
         setValuesFiltered([{...filterWithZeroReturn}])
       } else{
         setValuesFiltered(response.itens);
