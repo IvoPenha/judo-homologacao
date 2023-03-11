@@ -73,6 +73,8 @@ export function CadastroAgremiacao() {
   const { notes, setNotes, files, currentFileToCreate } = useFormikProvider();
 
   const [isValid, setIsValid] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  
 
   const onBlurForm = () => {
     if (formik.errors.sigla) {
@@ -202,13 +204,22 @@ export function CadastroAgremiacao() {
   };
 
   useEffect(() => {
+    formik.setErrors(initialErrors)
     //@ts-ignore
     window.addEventListener("load", handleUpdateFormikRegisterValues());
     return () => {
       //@ts-ignore
       window.removeEventListener("load", handleUpdateFormikRegisterValues());
     };
+    
   }, []);
+  const initialErrors = {
+    nome: 'O nome é obrigatório'
+  };
+  
+  useEffect(() => {
+    setIsDisabled(Object.keys(formik.errors).length > 0);
+  }, [formik.errors]);
 
   // const handleAddAnotation = () => {
   //     formik.setFieldValue('anotacoes', notes)
@@ -1071,9 +1082,10 @@ export function CadastroAgremiacao() {
         }}
       >
         <Button color="success" type="submit"
-        disabled = {Object.keys(formik.errors).length> 1 || isValid}
+        disabled = {isDisabled}
         >
           <SaveOutlinedIcon />
+          {console.log(Object.keys(formik.errors))}
           Salvar
         </Button>
         <Button

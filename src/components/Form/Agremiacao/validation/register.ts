@@ -28,5 +28,5 @@ export const validation = {
   contratoSocial: Yup.boolean().notRequired(),  //.required('Contrato Social é obrigatório'),
   documentacaoAtualizada: Yup.boolean().notRequired(),  //.required('Documentação atualizada é obrigatória'),
   idRegiao: Yup.number().required('Região é obrigatória'),
-  anotacoes: Yup.string().notRequired(),  //.required('Anotações é obrigatório'),
+  anotacoes: Yup.string().notRequired().nullable(),  //.required('Anotações é obrigatório'),
 };
