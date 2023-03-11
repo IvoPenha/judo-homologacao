@@ -1085,7 +1085,6 @@ export function CadastroAgremiacao() {
         disabled = {isDisabled}
         >
           <SaveOutlinedIcon />
-          {console.log(Object.keys(formik.errors))}
           Salvar
         </Button>
         <Button
