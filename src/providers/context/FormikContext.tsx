@@ -259,20 +259,26 @@ export function FormikProvider({ children }: FormikProviderProps) {
   // }, [newFilterFormatted]);
 
   useEffect(() => {
-    console.log(filtersToPost);
-    async function atribuittingApiValue() {
-      const response = await agremiacaoRoutes.postAgremiacaoFilter(
-        filtersToPost
-      );
-      if(response.itens.length == 0){
-        // @ts-ignore
-        setValuesFiltered([{...filterWithZeroReturn}])
-      } else{
-        setValuesFiltered(response.itens);
+    if (filtersToPost.length <= 0){
+      return
+    }else{
 
+      async function atribuittingApiValue() {
+        const response = await agremiacaoRoutes.postAgremiacaoFilter(
+          filtersToPost
+        );
+        console.log(response)
+        if(response.paginacao.total==0){
+          // @ts-ignore
+          return setValuesFiltered([{...filterWithZeroReturn}])
+        } else{
+          return setValuesFiltered(response.itens);
+  
+        }
       }
+      atribuittingApiValue();
+
     }
-    atribuittingApiValue();
 
     // This code will be executed after filtersToPost has been updated
   }, [filtersToPost]);

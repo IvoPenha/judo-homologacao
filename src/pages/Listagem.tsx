@@ -80,13 +80,6 @@ export function Listagem() {
               cursor: "pointer",
             }}
             onClick={() => {
-              const ResetFilterOptions = {
-                nomeParametro: 'Pais',
-                operacaoId : 1,
-                valorString: 'Brasil',
-                operadorLogico: 0,
-                operacoesMatematicas: 'true'
-              }
               setValuesFiltered([]);
               agremiacaoRoutes.postClearFilters()
               //Limpar o filtro no backend

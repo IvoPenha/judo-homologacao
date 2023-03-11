@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useInsertionEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -11,6 +11,8 @@ import type { IAgremiacao } from "../models/AgremiacaoModel";
 import type { FormikErrors } from "formik";
 
 import {
+  Snackbar, 
+  Alert,
   Grid,
   FormControlLabel,
   Checkbox,
@@ -27,6 +29,7 @@ import {
   StepLabel,
   Box,
 } from "@mui/material";
+import '../../node_modules/react-notifications/lib/notifications.css';
 
 import { StyledButton as Button } from "../components/Button";
 
@@ -178,6 +181,9 @@ export function CadastroAgremiacao() {
     },
   });
 
+  const campos = ['sigla', 'responsavel', 'nome', 'representante', 'dataFiliacao', 'fantasia', 'cep', 'endereco', 'bairro', 'email', 'telefone', 'cnpj', 'dataCnpj', 'inscricaoMunicipal', 'inscricaoEstadual', 'dataAta',]
+  const [erros, setErros] = useState([])
+
   const handleUpdateFormikRegisterValues = async () => {
     if (id === undefined) return;
     const response = await agremiacaoRoutes.getAgremiacao(id);
@@ -239,6 +245,7 @@ export function CadastroAgremiacao() {
     
   },[avatarPreview])
 
+  useEffect(()=>{console.log(erros)},[erros])
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -246,6 +253,7 @@ export function CadastroAgremiacao() {
       autoComplete="off"
     >
       {id ? <TabsAgremiacao /> : null}
+      {/* @ts-ignore */}
       <div
         id="cadastro"
         style={{
@@ -253,6 +261,57 @@ export function CadastroAgremiacao() {
           height: id !== undefined ? "77vh" : "80vh",
         }}
       >
+        {/* @ts-ignore */}
+      {
+          campos.map((campo) => {
+              useEffect(() => {
+          {/* @ts-ignore */}
+            if (formik.errors[campo] && formik.touched[campo] && !erros.includes(formik.errors[campo])) {
+            {/* @ts-ignore */}
+            setErros([...erros, `${formik.errors[campo]}`])
+            } else {
+            {/* @ts-ignore */}
+            if (!formik.errors[campo] && formik.touched[campo]) {
+            {/* @ts-ignore */}
+            erros.splice(erros.indexOf(formik.errors[campo]))
+                      }
+                  }
+
+              }
+
+              )
+          })
+
+      }
+        {/* @ts-ignore */}
+      {
+
+          erros.map((erro, index) => {
+              return (
+                  <Snackbar
+                      key={index}
+                      open={true}
+                      anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'right',
+                      }}
+                  >
+
+                      <Alert
+                          severity="error"
+                          sx={{
+                              position: 'absolute',
+                              bottom: `${40 + 60*index}px`,
+                              width: '300px'
+                          }}
+                      >
+                          {erro}
+                      </Alert>
+                  </Snackbar>
+              )
+          })
+      }
+<div/>
         <Grid container spacing={2} sx={{ display: "flex" }}>
           <Grid item xs={2}>
             <img
@@ -351,7 +410,7 @@ export function CadastroAgremiacao() {
             </div>
           </Grid>
           <Grid item xs={8}>
-            <Grid container spacing={2} sx={{ width: "600px" }}>
+            <Grid container spacing={2} sx={{ width: "75%" }}>
               <Grid item xs={4}>
                 <TextField
                   type="text"
@@ -554,7 +613,7 @@ export function CadastroAgremiacao() {
           </Grid>
 
           <Grid item xs={12}>
-            <Grid container spacing={2} style={{ width: "50%" }}>
+            <Grid container spacing={2} style={{ width: "75%" }}>
               <Grid item xs={12}>
                 <Typography
                   variant="h4"
@@ -673,7 +732,7 @@ export function CadastroAgremiacao() {
                 />
               </Grid>
 
-              <Grid item xs={2}>
+              <Grid item xs={4}>
                 <TextField
                   select
                   label="Cidade"
@@ -699,7 +758,7 @@ export function CadastroAgremiacao() {
                 </TextField>
               </Grid>
 
-              <Grid item xs={2}>
+              <Grid item xs={4}>
                 <TextField
                   select
                   label="Estado"
@@ -725,7 +784,7 @@ export function CadastroAgremiacao() {
                 </TextField>
               </Grid>
 
-              <Grid item xs={2}>
+              <Grid item xs={4}>
                 <TextField
                   select
                   label="País"
@@ -802,7 +861,7 @@ export function CadastroAgremiacao() {
           </Grid>
 
           <Grid item xs={12}>
-            <Grid container spacing={2} sx={{ width: "800px" }}>
+            <Grid container spacing={2} sx={{ width: "75%" }}>
               <Grid item xs={12}>
                 <Typography
                   variant="h4"
@@ -1011,7 +1070,9 @@ export function CadastroAgremiacao() {
           bottom: 0,
         }}
       >
-        <Button color="success" type="submit">
+        <Button color="success" type="submit"
+        disabled = {Object.keys(formik.errors).length> 1 || isValid}
+        >
           <SaveOutlinedIcon />
           Salvar
         </Button>
@@ -1020,7 +1081,6 @@ export function CadastroAgremiacao() {
             e.preventDefault();
             handleClickOpen(3);
           }}
-        disabled = {Object.keys(formik.errors).length> 1 || isValid}
 
           // disabled
         >
