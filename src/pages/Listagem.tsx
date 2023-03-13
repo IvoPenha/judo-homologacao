@@ -276,7 +276,7 @@ export function Listagem() {
                     disableSelectionOnClick
                     hideFooterPagination
                     density="compact"
-                    components={{ Toolbar: QuickSearchToolbar }}
+                    components={{ Toolbar: QuickSearchToolbar}}
                     rowsPerPageOptions={[25]}
                     localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
                     componentsProps={{
@@ -286,6 +286,7 @@ export function Listagem() {
                       footer: {
                         sx: { color: "#4887C8", fontWeight: "bold", position:'fixed', bottom: 0}, 
                       },
+                      
 
                     }}
                     experimentalFeatures={{ newEditingApi: true }}

@@ -181,7 +181,7 @@ export function CadastroAgremiacao() {
     },
   });
 
-  const campos = ['sigla', 'responsavel', 'nome', 'representante', 'dataFiliacao', 'fantasia', 'cep', 'endereco', 'bairro', 'email', 'telefone', 'cnpj', 'dataCnpj', 'inscricaoMunicipal', 'inscricaoEstadual', 'dataAta',]
+  const campos = ['sigla', 'responsavel', 'nome', 'representante', 'dataFiliacao', 'fantasia', 'cep', 'endereco', 'bairro', 'email', 'telefone', 'cnpj', 'dataCnpj', 'complemento','inscricaoMunicipal', 'inscricaoEstadual', 'dataAta',]
   const [erros, setErros] = useState([])
 
   const handleUpdateFormikRegisterValues = async () => {

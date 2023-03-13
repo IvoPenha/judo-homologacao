@@ -11,7 +11,7 @@ export const validation = {
   cep: Yup.boolean().notRequired(),
   endereco: Yup.boolean().notRequired(),
   bairro: Yup.boolean().notRequired(),
-  complemento: Yup.boolean().notRequired(),
+  complemento:  Yup.boolean().notRequired(),
   idCidade: Yup.boolean().notRequired(),
   idEstado: Yup.boolean().notRequired(),
   idPais: Yup.boolean().notRequired(),

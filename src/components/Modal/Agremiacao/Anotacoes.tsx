@@ -97,10 +97,10 @@ export function ModalAnotacoesAgremiacao({
             <DialogActions
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-end",
                 alignItems: "center",
                 width: "100%",
-                gap: 4,
+                gap: 2,
                 mt: 2,
               }}
             >
