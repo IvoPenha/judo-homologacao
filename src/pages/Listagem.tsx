@@ -275,6 +275,7 @@ export function Listagem() {
                     checkboxSelection
                     disableSelectionOnClick
                     hideFooterPagination
+                    disableColumnMenu
                     density="compact"
                     components={{ Toolbar: QuickSearchToolbar}}
                     rowsPerPageOptions={[25]}
@@ -286,8 +287,7 @@ export function Listagem() {
                       footer: {
                         sx: { color: "#4887C8", fontWeight: "bold", position:'fixed', bottom: 0}, 
                       },
-                      
-
+                    
                     }}
                     experimentalFeatures={{ newEditingApi: true }}
                     style={{
