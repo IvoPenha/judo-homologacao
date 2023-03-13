@@ -92,9 +92,10 @@ export function ModalExportarAgremiacao() {
     setIsCheckAll(false);
     setIsIndeterminate(false);
   }
+  const {openModalId } = useModal()
   useEffect(() => {
-    resetCheckbox()
-  }, [handleClose]);
+    setIsDischeckAll(true)
+  }, [openModalId]);
 
   return (
     <Modal title="Exportar para planilha" modalId={4} width="sm">

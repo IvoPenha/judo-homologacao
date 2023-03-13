@@ -165,7 +165,7 @@ export function ModalAnexosAgremiacao() {
               </p>
             ))}
             <DialogActions sx={{ display: "flex", gap: 2 }}>
-              <Button onClick={handleSubmit}>{"Enviar"}</Button>
+              <Button onClick={handleSubmit}><CloudUploadIcon/> {"Enviar"}</Button>
               <Button
                 color="error"
                 type="button"
@@ -174,6 +174,7 @@ export function ModalAnexosAgremiacao() {
                   return handleClose();
                 }}
               >
+                <Close/>
                 Cancelar
               </Button>
             </DialogActions>

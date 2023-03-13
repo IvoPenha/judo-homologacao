@@ -126,6 +126,7 @@ export function FormFilterAgremiacao({
           <TextField
             select
             variant="outlined"
+            label="Abre ("
             name='initialParentheses'
             id='initialParentheses'
             value={values?.initialParentheses ?? formik.values['initialParentheses']}
@@ -225,6 +226,7 @@ export function FormFilterAgremiacao({
           <TextField
             select
             variant="outlined"
+            label="Fecha )"
             name='finalParentheses'
             id='finalParentheses'
             value={values?.finalParentheses ?? formik.values['finalParentheses']}
@@ -346,6 +348,7 @@ export function FormFilterAgremiacao({
           <TextField
             select
             variant="outlined"
+            label="Abre ("
             name="initialParentheses"
             id="initialParentheses"
             value={formik.values["initialParentheses"]}
@@ -362,6 +365,9 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           >
             {AgremiacaoOptions.AgremiacaoParenthesesValues.initial.map(
               (parentheses: { value: string; label: string }) => (
@@ -485,6 +491,7 @@ export function FormFilterAgremiacao({
 
           <TextField
             select
+            label="Fecha )"
             variant="outlined"
             name="finalParentheses"
             id="finalParentheses"
@@ -504,6 +511,9 @@ export function FormFilterAgremiacao({
                 WebkitTextFillColor: "#000000",
               },
               width: 150,
+            }}
+            InputLabelProps={{
+              shrink: true,
             }}
             fullWidth
             disabled
