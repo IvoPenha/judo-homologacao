@@ -58,9 +58,7 @@ export function ModalExportarAgremiacao() {
       },
       onSettled: async (data) => {
         downloadFile(data, `agremiacoes-${new Date().toLocaleDateString()}.xlsx`)
-        // const blobClient = new BlobClient(data);
-        // await blobClient.downloadToFile(`agremiacoes-${new Date().toLocaleDateString()}.xlsx`);
-      },
+       },
       onError: () => {
         emitAlertMessage("error", "Erro ao exportar agremiações");
       },
@@ -69,20 +67,33 @@ export function ModalExportarAgremiacao() {
 
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isIndeterminate, setIsIndeterminate] = useState(false);
+  const [isDischeckAll, setIsDischeckAll] = useState(false);
 
   const [isAllCheckboxChecked, setIsAllCheckboxChecked] = useState(false);
   function handleCheckAll() {
-    setIsCheckAll(true);
-    setIsIndeterminate(false);
+    if (isIndeterminate == true || isCheckAll == true){
+      setIsDischeckAll(true)
+      setIsCheckAll(false)
+      setIsIndeterminate(false)
+    } else{
+      setIsDischeckAll(false)
+      setIsCheckAll(true);
+      setIsIndeterminate(false);
+    }
   }
-  function handleDisCheckAll() {
+  function handleInderteminate(bool : boolean) {
+    setIsDischeckAll(false)
     setIsCheckAll(false);
     setIsIndeterminate(true);
-    return false;
+    return bool;
+  }
+  function resetCheckbox() {
+    setIsDischeckAll(false)
+    setIsCheckAll(false);
+    setIsIndeterminate(false);
   }
   useEffect(() => {
-    setIsCheckAll(false);
-    setIsAllCheckboxChecked(false);
+    resetCheckbox()
   }, [handleClose]);
 
   return (
@@ -91,9 +102,10 @@ export function ModalExportarAgremiacao() {
         <Container maxWidth={false} sx={{}}>
           <Grid
             container
-            spacing={2}
+            rowSpacing={.5}
+            columnSpacing={2}
             gridAutoColumns={"1fr"}
-            sx={{ pl: 2, pt: 2 }}
+            sx={{ pl: 2, pt: 2, }}
           >
             <FormControlLabel
               control={
@@ -106,11 +118,11 @@ export function ModalExportarAgremiacao() {
                   id={"checkAll"}
                 />
               }
-              label={"Exportar tudo"}
+              label={"Selecionar tudo"}
             />
 
             {AgremiacaoExportValues.map((item, index) => (
-              <Grid item xs={12}>
+              <Grid item xs={12} maxHeight={45}>
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -118,16 +130,24 @@ export function ModalExportarAgremiacao() {
                       checked={
                         isCheckAll
                         //@ts-ignore
-                          ? (formik.values[item.value] = true) : formik.values[item.value]
+                          ? (formik.values[item.value] = true) : 
+                        //@ts-ignore
+                          isDischeckAll ? formik.values[item.value] = false : formik.values[item.value]
                       }
                       onChange={
                         isCheckAll
                           ? () => {
-                              handleDisCheckAll();
+                            handleInderteminate(false);
                         //@ts-ignore
                               formik.values[item.value] = false;
                             }
-                          : (formik.handleChange as any)
+                          : 
+                          isDischeckAll
+                            ? () => {
+                              handleInderteminate(true);
+                          //@ts-ignore
+                                formik.values[item.value] = true;
+                              } : (formik.handleChange as any)
                       }
                       name={item.value}
                       id={item.value}
@@ -140,12 +160,15 @@ export function ModalExportarAgremiacao() {
             ))}
             <DialogActions
               sx={{
+                position:'absolute',
                 display: "flex",
                 justifyContent: "flex-end",
                 alignItems: "center",
                 width: "100%",
                 gap: 4,
                 mt: 2,
+                bottom:4,
+                right: 18
               }}
             >
               <Button type="submit" disabled={isLoading}>

@@ -56,9 +56,9 @@ import { values as InitialValues } from "../components/Form/Agremiacao/values/re
 import { validation as ValidationSchema } from "../components/Form/Agremiacao/validation/register";
 
 import AvatarDefault from "../assets/photo-user-default.png";
+import LogoCorreios from "../assets/correios.svg";
 import "../styles/cadastro-agremiacao.scss";
 import { TabsAgremiacao } from "./Agremiacao/Tabs";
-import { width } from "@mui/system";
 
 export function CadastroAgremiacao() {
   const navigate = useNavigate();
@@ -128,14 +128,11 @@ export function CadastroAgremiacao() {
       //   document.getElementsByName(errorList[0])[0].scrollIntoView();
     }
     formik.handleSubmit
-    
-  
-
   }
       
   },[count])
 
-  const handleRoutes = () => {
+  const handleRoutes = async () => {
     if (id) {
       const valuesToPost = {
         ...formik.values,
@@ -161,11 +158,11 @@ export function CadastroAgremiacao() {
     console.log("formik values", formik.values);
     console.log("values to post", valuesToPost);
     //@ts-ignore
-    return agremiacaoRoutes.createAgremiacao(valuesToPost);
+    return await agremiacaoRoutes.createAgremiacao(valuesToPost)
   };
 
   //@ts-ignore
-  const { isLoading, mutate } = useMutation(() => handleRoutes(), {
+  const { isLoading, mutate, data } = useMutation(() => handleRoutes(), {
     onSuccess: () => {
       //@ts-ignore
       queryClient.invalidateQueries("agremiacao-list");
@@ -176,6 +173,7 @@ export function CadastroAgremiacao() {
       navigate("/agremiacao");
     },
     onError: () => {
+      console.log(data)
       const errorMsg = id
         ? "Erro ao editar agremiação"
         : "Erro ao cadastrar agremiação";
@@ -220,13 +218,6 @@ export function CadastroAgremiacao() {
   useEffect(() => {
     setIsDisabled(Object.keys(formik.errors).length > 0);
   }, [formik.errors]);
-
-  // const handleAddAnotation = () => {
-  //     formik.setFieldValue('anotacoes', notes)
-  //     console.log('register val anotation', notes)
-  //     console.log('formik val after anotation', formik.values)
-  //     handleClose();
-  // }
 
   const handleDeleteAgremiacao = () => {
     Swal.fire({
@@ -347,7 +338,6 @@ export function CadastroAgremiacao() {
                           typeof fileReader.result !== "string"
                         )
                           return;
-                        // setAvatarPreview(fileReader.result)
                         setAvatarPreview(fileReader.result);
                       }
                     };
@@ -379,7 +369,6 @@ export function CadastroAgremiacao() {
                           typeof fileReader.result !== "string"
                         )
                           return;
-                        // setAvatarPreview(fileReader.result)
                         setAvatarPreview(fileReader.result);
                       }
                     };
@@ -396,22 +385,7 @@ export function CadastroAgremiacao() {
                   <CreateOutlinedIcon />
                 </IconButton>
               </InputLabel>
-
-{/* 
-              <InputLabel htmlFor="button" sx={{ color: "black" }} >
-                <Input
-                  type="button"
-                  id="foto"
-                  name="foto"
-                  onClick={() => {
-                    console.log('oi')
-                    setAvatarPreview(AvatarDefault);
-                    formik.setFieldValue("foto",  null );
-                  }}
-                  sx={{ display: "none" }}
-                /> */}
-
-                <IconButton aria-label="upload picture" component="span" onClick={()=> {
+                  <IconButton aria-label="upload picture" component="span" onClick={()=> {
                   setAvatarPreview(AvatarDefault)
                   formik.setFieldValue('foto',null)}
                   }>
@@ -420,7 +394,7 @@ export function CadastroAgremiacao() {
 
             </div>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <Grid container spacing={2} sx={{ width: "75%" }}>
               <Grid item xs={4}>
                 <TextField
@@ -437,6 +411,7 @@ export function CadastroAgremiacao() {
                   helperText={formik.touched["sigla"] && formik.errors["sigla"]}
                   size="small"
                   fullWidth
+                  inputProps={{ maxLength: 8 }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -458,10 +433,9 @@ export function CadastroAgremiacao() {
                     formik.touched["dataFiliacao"] &&
                     Boolean(formik.errors["dataFiliacao"])
                   }
-                  helperText={
-                    formik.touched["dataFiliacao"] &&
-                    formik.errors["dataFiliacao"]
-                  }
+                  sx={{
+                    width: 150
+                  }}
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -482,7 +456,6 @@ export function CadastroAgremiacao() {
                   error={
                     formik.touched["nome"] && Boolean(formik.errors["nome"])
                   }
-                  helperText={formik.touched["nome"] && formik.errors["nome"]}
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -528,10 +501,6 @@ export function CadastroAgremiacao() {
                     formik.touched["responsavel"] &&
                     Boolean(formik.errors["responsavel"])
                   }
-                  helperText={
-                    formik.touched["responsavel"] &&
-                    formik.errors["responsavel"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -553,10 +522,6 @@ export function CadastroAgremiacao() {
                     formik.touched["representante"] &&
                     Boolean(formik.errors["representante"])
                   }
-                  helperText={
-                    formik.touched["representante"] &&
-                    formik.errors["representante"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -577,14 +542,13 @@ export function CadastroAgremiacao() {
                     formik.touched["dataNascimento"] &&
                     Boolean(formik.errors["dataNascimento"])
                   }
-                  helperText={
-                    formik.touched["dataNascimento"] &&
-                    formik.errors["dataNascimento"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  sx={{
+                    width: 150
                   }}
                 />
               </Grid>
@@ -604,9 +568,6 @@ export function CadastroAgremiacao() {
                     formik.touched["idRegiao"] &&
                     Boolean(formik.errors["idRegiao"])
                   }
-                  helperText={
-                    formik.touched["idRegiao"] && formik.errors["idRegiao"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -623,7 +584,7 @@ export function CadastroAgremiacao() {
             <Divider />
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={10}>
             <Grid container spacing={2} style={{ width: "75%" }}>
               <Grid item xs={12}>
                 <Typography
@@ -636,7 +597,13 @@ export function CadastroAgremiacao() {
                 </Typography>
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid item xs={3} 
+                  sx={{
+                    display: "flex",
+                    flexDirection:'row',
+                    gap: 2,
+                    alignItems: 'center'
+                  }}>
                 <TextField
                   type="text"
                   label="CEP *"
@@ -646,24 +613,29 @@ export function CadastroAgremiacao() {
                   onChange={formik.handleChange}
                   onBlur={formik.errors.cep ? formik.handleBlur : onBlurCep}
                   error={formik.touched["cep"] && Boolean(formik.errors["cep"])}
-                  helperText={formik.touched["cep"] && formik.errors["cep"]}
                   size="small"
                   fullWidth
+                  inputProps={{ maxLength: 8 }}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  sx={{
+                    width: 150,
+                    display: "flex",
+                    flexDirection:'row'
+                  }}
                 />
-              </Grid>
-
               <Grid item xs={2}>
                 <Link
                   href="https://buscacepinter.correios.com.br/app/endereco/index.php"
                   variant="body2"
                   target="_blank"
                 >
-                  Buscar CEP
+                <img src={LogoCorreios} alt="a" title="Buscar CEP"/>
                 </Link>
               </Grid>
+              </Grid>
+
 
               <Grid item xs={7}>
                 <TextField
@@ -677,9 +649,6 @@ export function CadastroAgremiacao() {
                   error={
                     formik.touched["endereco"] &&
                     Boolean(formik.errors["endereco"])
-                  }
-                  helperText={
-                    formik.touched["endereco"] && formik.errors["endereco"]
                   }
                   size="small"
                   fullWidth
@@ -705,10 +674,6 @@ export function CadastroAgremiacao() {
                     formik.touched["complemento"] &&
                     Boolean(formik.errors["complemento"])
                   }
-                  helperText={
-                    formik.touched["complemento"] &&
-                    formik.errors["complemento"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -728,9 +693,6 @@ export function CadastroAgremiacao() {
                   onBlur={formik.handleBlur}
                   error={
                     formik.touched["bairro"] && Boolean(formik.errors["bairro"])
-                  }
-                  helperText={
-                    formik.touched["bairro"] && formik.errors["bairro"]
                   }
                   size="small"
                   fullWidth
@@ -756,9 +718,6 @@ export function CadastroAgremiacao() {
                     formik.touched["idCidade"] &&
                     Boolean(formik.errors["idCidade"])
                   }
-                  helperText={
-                    formik.touched["idCidade"] && formik.errors["idCidade"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -769,7 +728,7 @@ export function CadastroAgremiacao() {
                 </TextField>
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   select
                   label="Estado"
@@ -782,9 +741,6 @@ export function CadastroAgremiacao() {
                     formik.touched["idEstado"] &&
                     Boolean(formik.errors["idEstado"])
                   }
-                  helperText={
-                    formik.touched["idEstado"] && formik.errors["idEstado"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -795,7 +751,7 @@ export function CadastroAgremiacao() {
                 </TextField>
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   select
                   label="País"
@@ -806,9 +762,6 @@ export function CadastroAgremiacao() {
                   onBlur={formik.handleBlur}
                   error={
                     formik.touched["idPais"] && Boolean(formik.errors["idPais"])
-                  }
-                  helperText={
-                    formik.touched["idPais"] && formik.errors["idPais"]
                   }
                   size="small"
                   fullWidth
@@ -833,9 +786,6 @@ export function CadastroAgremiacao() {
                     formik.touched["telefone"] &&
                     Boolean(formik.errors["telefone"])
                   }
-                  helperText={
-                    formik.touched["telefone"] && formik.errors["telefone"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -856,7 +806,6 @@ export function CadastroAgremiacao() {
                   error={
                     formik.touched["email"] && Boolean(formik.errors["email"])
                   }
-                  helperText={formik.touched["email"] && formik.errors["email"]}
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -871,7 +820,7 @@ export function CadastroAgremiacao() {
             <Divider />
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={8}>
             <Grid container spacing={2} sx={{ width: "75%" }}>
               <Grid item xs={12}>
                 <Typography
@@ -896,12 +845,15 @@ export function CadastroAgremiacao() {
                   error={
                     formik.touched["cnpj"] && Boolean(formik.errors["cnpj"])
                   }
-                  helperText={formik.touched["cnpj"] && formik.errors["cnpj"]}
                   size="small"
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  sx={{
+                    width: 250
+                  }}
+                  inputProps={{ maxLength: 14 }}
                 />
               </Grid>
 
@@ -918,13 +870,13 @@ export function CadastroAgremiacao() {
                     formik.touched["dataCnpj"] &&
                     Boolean(formik.errors["dataCnpj"])
                   }
-                  helperText={
-                    formik.touched["dataCnpj"] && formik.errors["dataCnpj"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  sx={{
+                    width: 150
                   }}
                 />
               </Grid>
@@ -942,14 +894,14 @@ export function CadastroAgremiacao() {
                     formik.touched["inscricaoMunicipal"] &&
                     Boolean(formik.errors["inscricaoMunicipal"])
                   }
-                  helperText={
-                    formik.touched["inscricaoMunicipal"] &&
-                    formik.errors["inscricaoMunicipal"]
-                  }
                   size="small"
                   fullWidth
+                  inputProps={{ maxLength: 11 }}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  sx={{
+                    width: 250
                   }}
                 />
               </Grid>
@@ -967,15 +919,15 @@ export function CadastroAgremiacao() {
                     formik.touched["inscricaoEstadual"] &&
                     Boolean(formik.errors["inscricaoEstadual"])
                   }
-                  helperText={
-                    formik.touched["inscricaoEstadual"] &&
-                    formik.errors["inscricaoEstadual"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  sx={{
+                    width: 250
+                  }}
+                  inputProps={{ maxLength: 11 }}
                 />
               </Grid>
 
@@ -992,13 +944,13 @@ export function CadastroAgremiacao() {
                     formik.touched["dataAta"] &&
                     Boolean(formik.errors["dataAta"])
                   }
-                  helperText={
-                    formik.touched["dataAta"] && formik.errors["dataAta"]
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  sx={{
+                    width: 150
                   }}
                 />
               </Grid>

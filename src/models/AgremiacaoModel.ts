@@ -1,4 +1,4 @@
-import { Operator, LogicOperator } from "../types/Filters/Agremiacao/operator";
+import { Operator, LogicOperator, OperatorDate } from "../types/Filters/Agremiacao/operator";
 import { InitialParentheses, FinalParentheses } from "../types/Filters/Agremiacao/parentheses";
 
 interface Agremiacaolocation{
@@ -43,7 +43,7 @@ export interface IFiltersAgremicao {
   initialParentheses: InitialParentheses | "";
   column: string;
   firstValue: string;
-  operator: Operator | "";
+  operator: Operator | OperatorDate | "";
   secondValue: string;
   finalParentheses: FinalParentheses | "";
   logicOperator: LogicOperator | "";

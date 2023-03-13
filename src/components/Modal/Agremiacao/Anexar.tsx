@@ -24,7 +24,7 @@ import {
   Close,
   CountertopsOutlined,
 } from "@mui/icons-material";
-import { StyledButton as Button } from '../../Button'
+import { StyledButton as Button } from "../../Button";
 import { UploadDocumentComponent } from "../../UploadDocument";
 import { ListDocumentsUploaded } from "../../UploadDocument/list";
 
@@ -71,24 +71,22 @@ export function ModalAnexosAgremiacao() {
   ));
 
   const { id } = useParams<{ id: string }>();
-  const { currentFileToCreate , setCurrentFileToCreate }= useFormikProvider()
+  const { currentFileToCreate, setCurrentFileToCreate } = useFormikProvider();
   const queryClient = useQueryClient();
   const { handleClose } = useModal();
   const { emitAlertMessage } = useAlertContext();
   const { anexarArquivoAgremiacao } = agremiacaoRoutes;
 
-
   async function handleSubmit() {
-    setCurrentFileToCreate(files)
-    handleClose()
+    setCurrentFileToCreate(files);
+    handleClose();
   }
-  useEffect(()=>{
-    if(id){
+  useEffect(() => {
+    if (id) {
       //@ts-ignore
-      anexarArquivoAgremiacao(id, currentFileToCreate)
+      anexarArquivoAgremiacao(id, currentFileToCreate);
     }
-  }, [ currentFileToCreate ])
-
+  }, [currentFileToCreate]);
 
   const [files, setFiles] = useState<File[]>([]);
 
@@ -96,14 +94,13 @@ export function ModalAnexosAgremiacao() {
     setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
   }, []);
 
-
   return (
     <Modal title="Anexos" modalId={3} width="md">
-      <form >
+      <form>
         <Container maxWidth={false} sx={{ flexGrow: 1, p: 5 }}>
           <Grid
             container
-            spacing={2}
+            spacing={0}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -123,10 +120,12 @@ export function ModalAnexosAgremiacao() {
                     cursor: "pointer",
                     width: "100%",
                     gap: 10,
-                    backgroundColor: isDragActive || isFocused ? "#eaf6ff" : "inherit",
-                    border: isDragActive || isFocused 
-                      ? "1px dashed #2196f3"
-                      : "1px dashed black",
+                    backgroundColor:
+                      isDragActive || isFocused ? "#eaf6ff" : "inherit",
+                    border:
+                      isDragActive || isFocused
+                        ? "1px dashed #2196f3"
+                        : "1px dashed black",
                     borderRadius: "5px",
                   }}
                 >
@@ -134,25 +133,39 @@ export function ModalAnexosAgremiacao() {
                   <UploadFile
                     style={{
                       display: "block",
-                      color: isDragActive || isFocused  ? "#0a83df" : "#2d6c9c",
+                      color: isDragActive || isFocused ? "#0a83df" : "#2d6c9c",
                     }}
                     fontSize="large"
                   />
-                    <p style={{ margin: "0", fontSize: "16px", color: "#888" }}>
-                      Arraste um arquivo para aqui, ou clique e selecione
-                    </p>
+                  <p style={{ margin: "0", fontSize: "16px", color: "#888" }}>
+                    Arraste um arquivo para aqui, ou clique e selecione
+                  </p>
                 </div>
               )}
             </Dropzone>
-              {files.map((file) => (
-                <p key={file.name} style={{color: '#3f6787', display: 'flex' , alignItems: 'center', gap: 5, zIndex: 1000}}><FilePresent/> {file.name}   <Close color="warning" sx={{cursor: 'pointer'}} onClick={()=> setFiles(files.filter(item => item.name !== file.name))}/></p>
-              ))}
-            <DialogActions sx={{display: 'flex', gap: 2}}>
-              <Button
-                onClick={handleSubmit}
+            {files.map((file) => (
+              <p
+                key={file.name}
+                style={{
+                  color: "#3f6787",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                  zIndex: 1000,
+                }}
               >
-                {"Enviar"}
-              </Button>
+                <FilePresent /> {file.name}{" "}
+                <Close
+                  color="warning"
+                  sx={{ cursor: "pointer" }}
+                  onClick={() =>
+                    setFiles(files.filter((item) => item.name !== file.name))
+                  }
+                />
+              </p>
+            ))}
+            <DialogActions sx={{ display: "flex", gap: 2 }}>
+              <Button onClick={handleSubmit}>{"Enviar"}</Button>
               <Button
                 color="error"
                 type="button"

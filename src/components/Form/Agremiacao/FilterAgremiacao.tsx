@@ -37,12 +37,12 @@ export function FormFilterAgremiacao({
       logicOperator: "",
     },
     validationSchema: Yup.object().shape({
-      initialParentheses: Yup.string().required("Campo obrigatório"),
+      initialParentheses: Yup.string().notRequired(),
       column: Yup.string().required("Campo obrigatório"),
       firstValue: Yup.string().required("Campo obrigatório"),
       operator: Yup.string().required("Campo obrigatório"),
       secondValue: Yup.string().notRequired(), //.required('Campo obrigatório')
-      finalParentheses: Yup.string().required("Campo obrigatório"),
+      finalParentheses: Yup.string().notRequired(),
       logicOperator: Yup.string().notRequired(), //.required('Campo obrigatório')
     }),
     onSubmit: (values: IFiltersAgremicao) => {
@@ -60,6 +60,22 @@ export function FormFilterAgremiacao({
       formik.resetForm();
     },
   });
+
+  function handleDateFormat(dateString: string) {
+    const date = new Date(dateString);
+    const day = date.getDate() + 1;
+
+    const month = date.getMonth() + 1;
+
+    const year = date.getFullYear();
+    const text = `${day > 10 ? day : "0" + day}/${
+      month > 10 ? month : "0" + month
+    }/${year}`;
+    if( text== '0NaN/0NaN/NaN'){
+      return dateString
+    } else 
+    return text
+  }
 
   const handleRemoveFilter = () => {
     const newArrayFilters = filtersAgremiacao.filter((_, index) => index !== indexValues);
@@ -180,7 +196,7 @@ export function FormFilterAgremiacao({
             label='Valor 1'
             name='firstValue'
             id='firstValue'
-            value={values?.firstValue ?? formik.values['firstValue']}
+            value={!isColumnDate ?  (values?.firstValue && handleDateFormat(values?.firstValue)) ?? formik.values['firstValue'] : values?.firstValue ?? formik.values['firstValue'] }
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.touched['firstValue'] && Boolean(formik.errors['firstValue'])}
@@ -370,6 +386,9 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           >
             {AgremiacaoOptions.AgremiacaoHeaderValues.map((item) => (
               <MenuItem value={item.value}>{item.label}</MenuItem>
@@ -392,6 +411,9 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           >
             {
               !isColumnDate ?
@@ -411,7 +433,7 @@ export function FormFilterAgremiacao({
           <TextField
             type= {isColumnDate ? "date" : isColumnNumber ? "number" : "text"}
             variant="outlined"
-            label={isColumnDate ? "" : "Valor 1"}
+            label={"Valor 1"}
             name="firstValue"
             id="firstValue"
             value={formik.values["firstValue"]}
@@ -430,12 +452,15 @@ export function FormFilterAgremiacao({
               inputProps: { min: 0 }
             }}
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
 
           <TextField
             variant="outlined"
             type= {isColumnDate ? "date" : isColumnNumber ? "number" : "text"}
-            label={isColumnDate ? "" : "Valor 2"}
+            label={"Valor 2"}
             name="secondValue"
             id="secondValue"
             value={formik.values["secondValue"]}
@@ -453,6 +478,9 @@ export function FormFilterAgremiacao({
             disabled={
               formik.values["operator"] !== "ENTRE" || values !== undefined
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
 
           <TextField

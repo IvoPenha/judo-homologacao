@@ -9,7 +9,7 @@ import { Listagem } from "./pages/Listagem";
 import { CadastroAgremiacao } from "./pages/CadastroAgremiacao";
 
 import { useAuthContext } from "./hooks/useAuthProvider";
-import { ModalFilterAgremiacao } from "./components/Modal/modalFilterAgremiacao";
+import { ModalFilterAgremiacao } from "./components/Modal/Agremiacao/modalFilterAgremiacao";
 
 // interface ProtectedRoutePageProps {
 //   Page: JSXElementConstructor<any>;

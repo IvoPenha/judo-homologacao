@@ -33,7 +33,7 @@ export function Modal({ title, children, width, modalId }: ModalProps) {
         },
       }}
     >
-      <DialogTitle sx={{ m: 0, mb: 1, ml: 1, p: 2 }}>
+      <DialogTitle sx={{ m: 0, mb: 0, ml: 1, p: 2, pb: 0 }}>
         {title && (
           <Typography
             color="#4887C8"

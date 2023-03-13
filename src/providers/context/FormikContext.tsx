@@ -33,6 +33,8 @@ interface FormikContextProps {
   handleChangeFile: (file: FilesTypes) => void;
   currentFileToCreate: File[];
   setCurrentFileToCreate: React.Dispatch<SetStateAction<File[]>>;
+  selectedRowsAgremiacao: never[],
+  setSelectedRowsAgremiacao :React.Dispatch<SetStateAction<never[]>>
 }
 
 import { agremiacaoRoutes } from "../services/api/agremiacao";
@@ -78,6 +80,7 @@ export function FormikProvider({ children }: FormikProviderProps) {
   const [valuesFiltered, setValuesFiltered] = useState<IAgremiacao[]>([]);
   const [notes, setNotes] = useState<string>("");
   const [files, setFiles] = useState<FilesTypes>({});
+  const [selectedRowsAgremiacao, setSelectedRowsAgremiacao] = useState([])
   const { verifyToken } = useAuthContext();
 
   useEffect(() => {
@@ -224,7 +227,7 @@ export function FormikProvider({ children }: FormikProviderProps) {
       ) {
         return {
           nomeParametro: filter.column,
-          operacaoId: operatorsOptions.indexOf(filter.operator),
+          operacaoId: operatorsOptions.indexOf(filter.operator) - 1,
           dataInicial: filter.firstValue, //TODO: change to date
           dataFinal: filter.secondValue, //TODO: change to date
           operadorLogico: logicOperatorsOptions.indexOf(filter.logicOperator),
@@ -237,7 +240,7 @@ export function FormikProvider({ children }: FormikProviderProps) {
           valorString: filter.firstValue,
           valorString2: filter.secondValue,
           operadorLogico: logicOperatorsOptions.indexOf(filter.logicOperator),
-          operacoesMatematicas: false, //TODO: change to boolean
+          operacoesMatematicas: true, //TODO: change to boolean
         };
       }
     }
@@ -300,7 +303,9 @@ export function FormikProvider({ children }: FormikProviderProps) {
         files,
         handleChangeFile,
         currentFileToCreate,
-        setCurrentFileToCreate
+        setCurrentFileToCreate,
+        selectedRowsAgremiacao,
+        setSelectedRowsAgremiacao
       }}
     >
       {children}

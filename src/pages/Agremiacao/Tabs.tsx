@@ -28,7 +28,8 @@ export function TabsAgremiacao() {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
-        sx={{ backgroundColor: '#FFFFFF', width: '100%', position: 'absolute',top:60, left: 0 }}
+
+        sx={{ backgroundColor: '#FFFFFF', width: '100%', position: 'absolute',top:60, left: 0,padding: 0 }}
       >
         <Tab
           label="Listagem"
@@ -37,7 +38,12 @@ export function TabsAgremiacao() {
           sx={{
             borderLeft: '1px solid #ccc',
             borderRight: '1px solid #ccc',
-            ml: 4
+            ml: 3,
+            textTransform:'initial',
+            fontSize: '.9rem',
+            height:'4rem',
+            fontWeight: 'medium',
+            letterSpacing:'0.075em'
           }}
         />
         <Tab
@@ -46,8 +52,12 @@ export function TabsAgremiacao() {
           disabled
           to={id ? `agremiacao/editar/${id}` : "/agremiacao/cadastro"}
           sx={{
-            padding: 3,
-            borderRight: '1px solid #ccc'
+            borderRight: '1px solid #ccc',
+            textTransform:'initial',
+            fontSize: '.9rem',
+            fontWeight: 'medium',
+            letterSpacing:'0.075em'
+            
           }}
         />
       </Tabs>

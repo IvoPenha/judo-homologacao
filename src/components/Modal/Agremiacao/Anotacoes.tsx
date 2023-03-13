@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
-import ReactQuill from 'react-quill';
+import ReactQuill from "react-quill";
 //import '../../node_modules/react-quill/dist/quill.snow.css';
-import "../../../../node_modules/react-quill/dist/quill.snow.css"
+import "../../../../node_modules/react-quill/dist/quill.snow.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useFormik, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { useDebounce } from "../../../utils/useDebounce";
 
-import '../../../styles/global.scss'
+import "../../../styles/global.scss";
 
 import { Modal } from "../index";
-import { Container, Stack, Button, TextField, DialogActions } from "@mui/material";
-import { 
+import {
+  Container,
+  Stack,
+  TextField,
+  DialogActions,
+} from "@mui/material";
+import {
   ClearOutlined as ClearIcon,
-  CheckOutlined as CheckIcon 
-} from '@mui/icons-material';
+  CheckOutlined as CheckIcon,
+} from "@mui/icons-material";
+
+import { StyledButton as Button } from "../../Button";
 
 import { useAlertContext } from "../../../hooks/useAlertProvider";
 
@@ -23,51 +30,43 @@ import { useFormikProvider } from "../../../hooks/useFormikProvider";
 import { agremiacaoRoutes } from "../../../providers/services/api/agremiacao";
 import { useParams } from "react-router";
 
-
 interface ModalAnotacoesAgremiacaoProps {
   agremiacaoId: number;
   currentNotes?: any;
   isRegister?: boolean;
-};
+}
 
-export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegister = false }: ModalAnotacoesAgremiacaoProps) {
+export function ModalAnotacoesAgremiacao({
+  agremiacaoId,
+  currentNotes,
+  isRegister = false,
+}: ModalAnotacoesAgremiacaoProps) {
   const queryClient = useQueryClient();
   const { handleClose } = useModal();
   const { emitAlertMessage } = useAlertContext();
   const { setNotes } = useFormikProvider();
 
- 
-  useEffect(() => {
-    
-  }, [currentNotes])
+  useEffect(() => {}, [currentNotes]);
 
+  const [content, setContent] = useState("");
 
-  const [content, setContent] = useState('');
-
-  function handleChange(value:string) {
+  function handleChange(value: string) {
     setContent(value);
   }
 
-  
   const { id } = useParams<{ id: string }>();
   const handleUpdateFormikRegisterValues = async () => {
     if (id === undefined) return;
     //@ts-ignore
     const response = await agremiacaoRoutes.getAgremiacao(id);
-   
-    // console.log('response edit', response)
-    setContent(response.anotacoes)
+    setContent(response.anotacoes);
   };
 
-  useEffect(()=>{
-    handleUpdateFormikRegisterValues()
-  },[])
+  useEffect(() => {
+    handleUpdateFormikRegisterValues();
+  }, []);
 
   function handleSubmit() {
-    // if(id){
-    //   //@ts-ignore
-    //   agremiacaoRoutes.anotacoesAgremiacao(id, 'alo '+content.toString())
-    // }
     setNotes(content);
     handleClose();
   }
@@ -83,7 +82,6 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
             justifyContent="center"
             sx={{ p: 3 }}
           >
-            
             <ReactQuill
               theme="snow"
               id="anotacoes"
@@ -92,27 +90,10 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
               onChange={handleChange}
               //onBlur={formik.handleBlur}
               style={{
-                width: '100%',
+                width: "100%",
               }}
             />
-            
-            {/*
-            <TextField
-              label="Anotações"
-              multiline
-              rows={4}
-              fullWidth
-              variant="outlined"
-              type='text'
-              name='anotacoes'
-              id='anotacoes'
-              value={formik.values['anotacoes']}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched['anotacoes'] && Boolean(formik.errors['anotacoes'])}
-              helperText={formik.touched['anotacoes'] && formik.errors['anotacoes']}
-            />
-            */}
+
             <DialogActions
               sx={{
                 display: "flex",
@@ -132,7 +113,7 @@ export function ModalAnotacoesAgremiacao({ agremiacaoId, currentNotes, isRegiste
                 size="medium"
                 sx={{ minWidth: "120px", textTransform: "none" }}
               >
-                  Ok
+                Ok
               </Button>
               <Button
                 variant="contained"

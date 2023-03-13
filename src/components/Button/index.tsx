@@ -13,11 +13,12 @@ interface CustomButtonProps extends ButtonProps{
 const Button = styled(MuiButton)<ButtonProps>({
   width: "7.5rem",
   padding: "0.5rem",
-  fontSize: '.75rem',
+  fontSize: '.9rem',
   display: "flex",
   alignItems:"center",
   justifyContent: "center",
-  gap: 6
+  gap: 6,
+  textTransform: 'initial',
   
 });
 export function StyledButton(Props : CustomButtonProps) {

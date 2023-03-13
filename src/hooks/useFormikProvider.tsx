@@ -19,7 +19,9 @@ export function useFormikProvider() {
     files,
     handleChangeFile,
     currentFileToCreate,
-    setCurrentFileToCreate
+    setCurrentFileToCreate,
+    selectedRowsAgremiacao,
+    setSelectedRowsAgremiacao
   } = context;
 
   return {
@@ -37,6 +39,8 @@ export function useFormikProvider() {
     files,
     handleChangeFile,
     currentFileToCreate,
-    setCurrentFileToCreate
+    setCurrentFileToCreate,
+    selectedRowsAgremiacao,
+    setSelectedRowsAgremiacao
   };
 }
