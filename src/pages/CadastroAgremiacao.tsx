@@ -574,7 +574,7 @@ export function CadastroAgremiacao() {
                     shrink: true,
                   }}
                 >
-                  <MenuItem value={1}>Nordeste</MenuItem>
+                  <MenuItem value={1}>Urbana</MenuItem>
                 </TextField>
               </Grid>
             </Grid>
@@ -724,7 +724,7 @@ export function CadastroAgremiacao() {
                     shrink: true,
                   }}
                 >
-                  <MenuItem value={1}>Fortaleza</MenuItem>
+                  <MenuItem value={1}>Centro</MenuItem>
                 </TextField>
               </Grid>
 
@@ -747,7 +747,7 @@ export function CadastroAgremiacao() {
                     shrink: true,
                   }}
                 >
-                  <MenuItem value={1}>Ceará</MenuItem>
+                  <MenuItem value={1}>Rio de Janeiro</MenuItem>
                 </TextField>
               </Grid>
 
