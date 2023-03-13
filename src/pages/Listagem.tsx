@@ -68,9 +68,9 @@ export function Listagem() {
           display: "flex",
           justifyContent: "flex-end",
           alignItems: "center",
-          position: 'absolute',
-          right: 30,
-          top: {xl:-73, lg: -60}
+          position: 'fixed',
+          right: 8,
+          top: 70
         }}
       >
         {valuesFiltered.length > 0 ? (
@@ -240,6 +240,10 @@ export function Listagem() {
     console.log("lista", listaAgremiacao);
   }, [listaAgremiacao]);
 
+  const customLocaleText = {
+    footerTotalRows: `total de ${data?.itens.length} linhas`
+  }
+
   return (
     <Box
       component="main"
@@ -268,18 +272,19 @@ export function Listagem() {
                       valuesFiltered?.length > 0 ? valuesFiltered : data.itens
                     }
                     columns={columns}
-                    hideFooterPagination
                     checkboxSelection
                     disableSelectionOnClick
+                    hideFooterPagination
                     density="compact"
                     components={{ Toolbar: QuickSearchToolbar }}
+                    rowsPerPageOptions={[25]}
                     localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
                     componentsProps={{
                       baseTooltip: {
                         style: { color: "#4887C8", fontWeight: "bold" },
                       },
                       footer: {
-                        style: { color: "#4887C8", fontWeight: "bold"}
+                        sx: { color: "#4887C8", fontWeight: "bold", position:'fixed', bottom: 0}, 
                       },
 
                     }}
