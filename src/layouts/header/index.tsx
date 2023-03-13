@@ -64,11 +64,13 @@ interface HeaderItemProps {
 const HeaderItem = ({ title } : HeaderItemProps)  => {
   return (
     <>    
+      <Divider orientation="vertical" flexItem color="#ccc" />
       <Typography
         variant="h6"
         sx={{
-          pr: 4,
-          pl: 4,
+          width: 140,
+          display: 'flex',
+          justifyContent: 'center',
           color: 'inherit',
           fontWeight: 'medium',
           cursor: 'pointer',
@@ -95,7 +97,7 @@ export function Header() {
         onClick={logout}
         sx={{
           cursor: 'pointer',
-          pr: 3
+          pr: 3,
         }}
       />
     </StyledRoot>
