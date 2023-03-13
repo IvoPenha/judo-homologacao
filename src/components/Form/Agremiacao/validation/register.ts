@@ -19,7 +19,7 @@ export const validation = {
   email: Yup.string().email('Email inválido').required('Email é obrigatório'),
   cnpj: Yup.string().min(14, 'Número de CNPJ inválido').max(14, 'Número de CNPJ inválido').required('CNPJ é obrigatório'),
   inscricaoMunicipal: Yup.string().min(11, 'Número de inscrição inválida').max(11, 'Número de inscrição inválida').required('Inscrição municipal é obrigatória'),
-  inscricaoEstadual: Yup.string().min(11, 'Número de inscrição inválido').max(11, 'Número de inscrição inválida').required('Inscrição estadual é obrigatória'),
+  inscricaoEstadual: Yup.string().min(9, 'Número de inscrição inválido').max(9, 'Número de inscrição inválida').required('Inscrição estadual é obrigatória'),
   dataCnpj: Yup.date().required('Data do CNPJ é obrigatória'),
   dataAta: Yup.date().required('Data da ATA é obrigatória'),
   foto: Yup.mixed().notRequired(),

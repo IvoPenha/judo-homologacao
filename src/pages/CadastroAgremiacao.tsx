@@ -441,6 +441,7 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  
                 />
               </Grid>
 
@@ -461,6 +462,8 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{ maxLength: 60 }}
+
                 />
               </Grid>
 
@@ -485,6 +488,8 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{ maxLength: 60 }}
+
                 />
               </Grid>
 
@@ -506,6 +511,7 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{ maxLength: 60 }}
                 />
               </Grid>
 
@@ -527,6 +533,7 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{ maxLength: 60 }}
                 />
               </Grid>
 
@@ -679,6 +686,7 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{ maxLength: 60 }}
                 />
               </Grid>
 
@@ -791,6 +799,7 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{ maxLength: 12 }}
                 />
               </Grid>
 
@@ -811,6 +820,7 @@ export function CadastroAgremiacao() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{ maxLength: 60 }}
                 />
               </Grid>
             </Grid>
@@ -927,7 +937,7 @@ export function CadastroAgremiacao() {
                   sx={{
                     width: 250
                   }}
-                  inputProps={{ maxLength: 11 }}
+                  inputProps={{ maxLength: 9 }}
                 />
               </Grid>
 
