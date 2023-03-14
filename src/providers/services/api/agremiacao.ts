@@ -4,7 +4,6 @@ import type { Page } from "../../../types/page";
 
 import api from "../api";
 async function getAgremiacoes(filters?: any): Promise<Page<IAgremiacao>> {
-  postClearFilters()
   const response = await api.get(
     "/gerencia/agremiacao?Pagina=1&TamanhoPagina=64",
     { params: filters }

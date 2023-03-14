@@ -11,7 +11,16 @@ import {
   useGridApiRef,
   ptBR,
 } from "@mui/x-data-grid";
-import { AddOutlined, CreateOutlined as EditIcon, Filter, FilterAlt, FilterAltOff, NoteAddOutlined, PlusOneOutlined, UploadFile } from "@mui/icons-material";
+import {
+  AddOutlined,
+  CreateOutlined as EditIcon,
+  Filter,
+  FilterAlt,
+  FilterAltOff,
+  NoteAddOutlined,
+  PlusOneOutlined,
+  UploadFile,
+} from "@mui/icons-material";
 
 import {
   Search,
@@ -32,12 +41,17 @@ import { StyledButton as Button } from "../components/Button";
 import api from "../providers/services/api";
 import { agremiacaoRoutes } from "../providers/services/api/agremiacao";
 import { TabsAgremiacao } from "./Agremiacao/Tabs";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 export function Listagem() {
   document.title = "Listagem de Agremiação";
   const navigate = useNavigate();
   const { handleClickOpen } = useModal();
-  const { valuesFiltered, setValuesFiltered, setSelectedRowsAgremiacao, selectedRowsAgremiacao } = useFormikProvider();
+  const {
+    valuesFiltered,
+    setValuesFiltered,
+    setSelectedRowsAgremiacao,
+    selectedRowsAgremiacao,
+  } = useFormikProvider();
   const { data, isError, isLoading } = useQuery(
     ["agremiacao-list"],
     agremiacaoRoutes.getAgremiacoes
@@ -62,40 +76,40 @@ export function Listagem() {
     return (
       <Box
         sx={{
-          p: 0.5,
-          pr: 2,
           flex: 1,
           display: "flex",
           justifyContent: "flex-end",
           alignItems: "center",
-          position: 'fixed',
-          flexDirection: 'row-reverse',
-          gap: 3,
+          position: "fixed",
+          flexDirection: "row-reverse",
+          gap: 2,
+          pr: 2,
           right: 5,
-          top: 70
+          top: 72,
         }}
       >
-          <button
-            style={{
-              color:  valuesFiltered.length > 0 ?"#4887C8" : '#ccc' ,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              background: 'transparent',
-              border: 'none',
-              cursor: valuesFiltered.length > 0 ? "pointer" : 'default'
-            }}
-            onClick={() => {
-              setValuesFiltered([]);
-              agremiacaoRoutes.postClearFilters()
-              //Limpar o filtro no backend
-            }}
-            disabled = { !(valuesFiltered.length > 0) }
-            >
-            <h4>Limpar Filtros</h4>
-            <FilterIcon />
-          </button>
-        
+        <button
+          style={{
+            color: valuesFiltered.length > 0 ? "#4887C8" : "#ccc",
+            fontSize: '.9rem',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            background: "transparent",
+            border: "none",
+            cursor: valuesFiltered.length > 0 ? "pointer" : "default",
+          }}
+          onClick={() => {
+            setValuesFiltered([]);
+            agremiacaoRoutes.postClearFilters();
+            //Limpar o filtro no backend
+          }}
+          disabled={!(valuesFiltered.length > 0)}
+        >
+          <h4>Limpar Filtros</h4>
+          <FilterIcon />
+        </button>
+
         <GridToolbarQuickFilter
           variant="outlined"
           size="small"
@@ -133,16 +147,15 @@ export function Listagem() {
             navigate(`editar/${params.id}`, { replace: true });
           }}
           sx={{
-            transform: 'scale(.7)',
-            ml: -1.4
+            transform: "scale(.7)",
+            ml: -1.4,
           }}
-          >
+        >
           <EditIcon />
         </Button>
       ),
       disableColumnMenu: true,
       hideSortIcons: true,
-      
     },
     { field: "sigla", headerName: "Sigla", width: 120 },
     { field: "nome", headerName: "Nome", width: 300 },
@@ -227,44 +240,61 @@ export function Listagem() {
       valueGetter: ({ value }) =>
         valuesFiltered.length == 0 ? value?.descricao : value,
     },
-    { field: "anotacoes", headerName: "Anotações", width: 500,valueFormatter: item => item.value != null ? item.value : ''  ,renderCell: (params) => params ?  parse(params.formattedValue) : '',
- },
+    {
+      field: "anotacoes",
+      headerName: "Anotações",
+      width: 500,
+      valueFormatter: (item) => (item.value != null ? item.value : ""),
+      renderCell: (params) => (params ? parse(params.formattedValue) : ""),
+    },
   ];
 
-  function handleSelectionModelChange(selection : any){
-    setSelectedRowsAgremiacao(selection)
+  function handleSelectionModelChange(selection: any) {
+    setSelectedRowsAgremiacao(selection);
   }
-
 
   const [listaAgremiacao, setListaAgremiacao] = useState([{}]);
   useEffect(() => {
-    console.log("lista", listaAgremiacao);
-  }, [listaAgremiacao]);
+    agremiacaoRoutes.postClearFilters()  
+  }, []);
 
   const customLocaleText = {
-    footerTotalRows: `total de ${data?.itens.length} linhas`
-  }
+    footerTotalRows: `total de ${data?.itens.length} linhas`,
+  };
 
   return (
     <Box
       component="main"
       sx={{
         flexGrow: 1,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        paddingTop: {sm: '.5rem', xl: '2.8rem', lg: '0'},
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        "@media (max-height : 1200px)": { paddingTop: "2.3rem" },
+        paddingTop: "2.8rem",
       }}
     >
-      <Container maxWidth={false} >
-        <Grid container spacing={1} >
+      <Container maxWidth={false}>
+        <Grid container spacing={1}>
           <TabsAgremiacao />
-          <Grid item xs={12} >
+          <Grid item xs={12}>
             <TabPanel value={valueTab} index={2}>
               <Home />
             </TabPanel>
             <TabPanel value={valueTab} index={0}>
-              <Box sx={{ width: "100%", backgroundColor: "#FFF",'@media (max-height : 800px)':{ height: '72vh' } , height: '78vh', flexGrow: 2, position: 'relative', zIndex: 2 }} >
+              <Box
+                sx={{
+                  width: "100%",
+                  backgroundColor: "#FFF",
+                  "@media (max-height : 600px)": { height: "40vh" },
+                  "@media (max-height : 800px)": { height: "72vh" },
+                  "@media (max-height : 1000px)": { height: "76vh" },
+                  height: "80vh",
+                  flexGrow: 2,
+                  position: "relative",
+                  zIndex: 2,
+                }}
+              >
                 {data?.itens ? (
                   <DataGrid
                     rows={
@@ -276,17 +306,23 @@ export function Listagem() {
                     hideFooterPagination
                     disableColumnMenu
                     density="compact"
-                    components={{ Toolbar: QuickSearchToolbar}}
+                    components={{ Toolbar: QuickSearchToolbar }}
                     rowsPerPageOptions={[25]}
-                    localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+                    localeText={
+                      ptBR.components.MuiDataGrid.defaultProps.localeText
+                    }
                     componentsProps={{
                       baseTooltip: {
                         style: { color: "#4887C8", fontWeight: "bold" },
                       },
                       footer: {
-                        sx: { color: "#4887C8", fontWeight: "bold", position:'fixed', bottom: 0}, 
+                        sx: {
+                          color: "#4887C8",
+                          fontWeight: "bold",
+                          position: "fixed",
+                          bottom: 0,
+                        },
                       },
-                    
                     }}
                     experimentalFeatures={{ newEditingApi: true }}
                     style={{
@@ -337,9 +373,9 @@ export function Listagem() {
                   backgroundColor: "#F5F5F5",
                   display: "flex",
                   justifyContent: "right",
-                  py: '6px',
+                  py: "6px",
                   gap: "1rem",
-                  maxHeight:'8vh' ,
+                  maxHeight: "8vh",
                   position: "absolute",
                   width: "100%",
                   left: 0,
@@ -351,19 +387,19 @@ export function Listagem() {
 
                   onClick={() => navigate("cadastro", { replace: true })}
                 >
-                 <AddOutlined/> Novo
+                  <AddOutlined /> Novo
                 </Button>
                 <Button
                   // disabled
                   onClick={() => handleClickOpen(4)}
                 >
-                  <UploadFile/> Exportar
+                  <UploadFile /> Exportar
                 </Button>
                 <Button
                   onClick={() => handleClickOpen(1)}
                   // disabled
                 >
-                  <FilterAlt/> Filtrar
+                  <FilterAlt /> Filtrar
                 </Button>
                 <Button disabled sx={{ marginRight: 3 }}>
                   Voltar

@@ -106,7 +106,9 @@ export function ModalExportarAgremiacao() {
             rowSpacing={.5}
             columnSpacing={2}
             gridAutoColumns={"1fr"}
-            sx={{ pl: 2, pt: 2, }}
+            sx={{ pl: 2, pt: 2, mb:'4rem'}}
+
+            
           >
             <FormControlLabel
               control={
@@ -166,10 +168,11 @@ export function ModalExportarAgremiacao() {
                 justifyContent: "flex-end",
                 alignItems: "center",
                 width: "100%",
-                gap: 4,
-                mt: 2,
-                bottom:4,
-                right: 18
+                background: '#fff',
+                height: '4rem',
+                gap: 2,
+                bottom:0,
+                right: 18,
               }}
             >
               <Button type="submit" disabled={isLoading}>
