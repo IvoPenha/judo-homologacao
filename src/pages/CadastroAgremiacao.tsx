@@ -677,10 +677,6 @@ export function CadastroAgremiacao() {
                   value={formik.values["complemento"]}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  error={
-                    formik.touched["complemento"] &&
-                    Boolean(formik.errors["complemento"])
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -852,9 +848,6 @@ export function CadastroAgremiacao() {
                   value={formik.values["cnpj"]}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  error={
-                    formik.touched["cnpj"] && Boolean(formik.errors["cnpj"])
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -876,10 +869,6 @@ export function CadastroAgremiacao() {
                   value={formik.values["dataCnpj"]}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  error={
-                    formik.touched["dataCnpj"] &&
-                    Boolean(formik.errors["dataCnpj"])
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -893,7 +882,7 @@ export function CadastroAgremiacao() {
 
               <Grid item xs={6}>
                 <TextField
-                  type="text"
+                  type="number"
                   label="Inscrição Municipal *"
                   name="inscricaoMunicipal"
                   id="inscricaoMunicipal"
@@ -901,8 +890,7 @@ export function CadastroAgremiacao() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={
-                    formik.touched["inscricaoMunicipal"] &&
-                    Boolean(formik.errors["inscricaoMunicipal"])
+                    formik.touched["inscricaoMunicipal"] && Boolean(formik.errors["inscricaoMunicipal"])
                   }
                   size="small"
                   fullWidth
@@ -926,8 +914,7 @@ export function CadastroAgremiacao() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={
-                    formik.touched["inscricaoEstadual"] &&
-                    Boolean(formik.errors["inscricaoEstadual"])
+                    formik.touched["inscricaoEstadual"] && Boolean(formik.errors["inscricaoEstadual"])
                   }
                   size="small"
                   fullWidth
@@ -950,10 +937,6 @@ export function CadastroAgremiacao() {
                   value={formik.values["dataAta"]}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  error={
-                    formik.touched["dataAta"] &&
-                    Boolean(formik.errors["dataAta"])
-                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{

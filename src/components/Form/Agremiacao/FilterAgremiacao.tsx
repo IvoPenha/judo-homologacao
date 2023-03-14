@@ -2,7 +2,7 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 
 import { MenuItem, Paper, Stack, TextField, Box } from "@mui/material";
-import { Add, Close } from "@mui/icons-material";
+import { Add, Close, Edit } from "@mui/icons-material";
 
 import type { IFiltersAgremicao } from "../../../models/AgremiacaoModel";
 import { AgremiacaoOptions } from "../../../models/AgremiacaoModel";
@@ -90,8 +90,10 @@ export function FormFilterAgremiacao({
     if (values) {
       return (
         <Box display='flex' alignItems='center' sx={{ gap: 2 }}>
-        <Close
-          sx={{ color: 'transparent' }}
+        <Edit
+          sx={{ 
+            color: 'transparent',// color: 'darkorange',
+            pointerEvents:'none' }}
           onClick={handleRemoveFilter}
         />
           <Close
@@ -105,7 +107,7 @@ export function FormFilterAgremiacao({
       <Box display='flex' alignItems='center' sx={{ gap: 2 }}>
         <Add
           sx={{ color: 'green', cursor: 'pointer' }}
-          onClick={(e: any) => formik.handleSubmit(e)}
+          onClick={(e:any) => formik.handleSubmit(e)}
         />
         <Close
           sx={{ color: 'red', cursor: 'pointer' }}
@@ -370,7 +372,6 @@ export function FormFilterAgremiacao({
             id="initialParentheses"
             value={formik.values["initialParentheses"]}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             error={
               formik.touched["initialParentheses"] &&
               Boolean(formik.errors["initialParentheses"])
@@ -403,7 +404,6 @@ export function FormFilterAgremiacao({
             id="column"
             value={formik.values["column"]}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             error={formik.touched["column"] && Boolean(formik.errors["column"])}
             helperText={formik.touched["column"] && formik.errors["column"]}
             sx={{ width: 150 }}
@@ -426,7 +426,6 @@ export function FormFilterAgremiacao({
             id="operator"
             value={formik.values["operator"]}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             error={
               formik.touched["operator"] && Boolean(formik.errors["operator"])
             }
@@ -461,7 +460,6 @@ export function FormFilterAgremiacao({
             id="firstValue"
             value={formik.values["firstValue"]}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             error={
               formik.touched["firstValue"] &&
               Boolean(formik.errors["firstValue"])
@@ -488,7 +486,6 @@ export function FormFilterAgremiacao({
             id="secondValue"
             value={formik.values["secondValue"]}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             error={
               formik.touched["secondValue"] &&
               Boolean(formik.errors["secondValue"])
@@ -514,7 +511,6 @@ export function FormFilterAgremiacao({
             id="finalParentheses"
             value={formik.values["finalParentheses"]}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             error={
               formik.touched["finalParentheses"] &&
               Boolean(formik.errors["finalParentheses"])
