@@ -19,7 +19,7 @@ export function TabsAgremiacao() {
   };
 
   return (
-    <Grid item xs={11} sx={{  }}>
+    <Grid item xs={10} sx={{  }}>
       <Tabs
         value={valueTab}
         onChange={handleChange}
@@ -28,7 +28,7 @@ export function TabsAgremiacao() {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
-
+        
         sx={{ backgroundColor: '#FFFFFF', width: '100%', position: 'absolute',top:60, left: 0,padding: 0 }}
       >
         <Tab
@@ -36,15 +36,20 @@ export function TabsAgremiacao() {
           component={Link}
           to="/agremiacao"
           sx={{
+            width: 142,
             borderLeft: '1px solid #ccc',
             borderRight: '1px solid #ccc',
             ml: 3,
             textTransform:'initial',
-            fontSize: '.9rem',
+            fontSize: '1.25rem',
             height:'4rem',
-            fontWeight: 'medium',
-            letterSpacing:'0.075em'
+            lineHeight:1.6,
+            fontWeight: 500,
+            letterSpacing:'0.0075em',
+            fontFamily: "Roboto"
           }}
+          color="primary"
+          
         />
         <Tab
           label="Detalhes"
@@ -52,13 +57,18 @@ export function TabsAgremiacao() {
           disabled
           to={id ? `agremiacao/editar/${id}` : "/agremiacao/cadastro"}
           sx={{
+            width: 142,
+            borderLeft: '1px solid #ccc',
             borderRight: '1px solid #ccc',
-            textTransform:'initial',
-            fontSize: '.9rem',
-            fontWeight: 'medium',
-            letterSpacing:'0.075em'
+            textTransform:'none',
+            fontSize: '1.25rem',
+            lineHeight:1.6,
+            fontWeight: 500,
+            letterSpacing:'0.0075em',
+            fontFamily: "Roboto"
             
           }}
+          color="primary"
         />
       </Tabs>
     </Grid>

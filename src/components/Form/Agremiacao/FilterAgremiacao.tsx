@@ -89,7 +89,11 @@ export function FormFilterAgremiacao({
   const HandleRenderButtons = () => {
     if (values) {
       return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box display='flex' alignItems='center' sx={{ gap: 2 }}>
+        <Close
+          sx={{ color: 'transparent' }}
+          onClick={handleRemoveFilter}
+        />
           <Close
             sx={{ cursor: 'pointer' }}
             onClick={handleRemoveFilter}
@@ -114,19 +118,18 @@ export function FormFilterAgremiacao({
   const HandleRenderForm = () => {
     return (
       <form>
-        <Stack
-          spacing={2}
-          direction="row"
-          alignItems="center"
-          justifyContent='space-between'
-          sx={{
-            m: 2
-          }}
+      <Stack
+        spacing={1}
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{
+          m: 3
+        }}
         >
           <TextField
             select
             variant="outlined"
-            label="Abre ("
             name='initialParentheses'
             id='initialParentheses'
             value={values?.initialParentheses ?? formik.values['initialParentheses']}
@@ -149,7 +152,6 @@ export function FormFilterAgremiacao({
           <TextField
             select
             variant="outlined"
-            label="Campo"
             name='column'
             id='column'
             value={values?.column ?? formik.values['column']}
@@ -160,6 +162,9 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           >
             {
               AgremiacaoOptions.AgremiacaoHeaderValues.map((item) => (
@@ -171,7 +176,6 @@ export function FormFilterAgremiacao({
           <TextField
             select
             variant="outlined"
-            label="Operador"
             name='operator'
             id='operator'
             value={values?.operator ?? formik.values['operator']}
@@ -182,6 +186,10 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            
           >
             {
               AgremiacaoOptions.AgremiacaoOperatorsValues
@@ -194,7 +202,6 @@ export function FormFilterAgremiacao({
           <TextField
             type='text'
             variant="outlined"
-            label='Valor 1'
             name='firstValue'
             id='firstValue'
             value={!isColumnDate ?  (values?.firstValue && handleDateFormat(values?.firstValue)) ?? formik.values['firstValue'] : values?.firstValue ?? formik.values['firstValue'] }
@@ -205,12 +212,14 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
 
           <TextField
             type='text'
             variant="outlined"
-            label="Valor 2"
             name='secondValue'
             id='secondValue'
             value={values?.secondValue ?? formik.values['secondValue']}
@@ -221,12 +230,14 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={formik.values['operator'] !== 'ENTRE' || values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
 
           <TextField
             select
             variant="outlined"
-            label="Fecha )"
             name='finalParentheses'
             id='finalParentheses'
             value={values?.finalParentheses ?? formik.values['finalParentheses']}
@@ -237,6 +248,9 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           >
             {
               AgremiacaoOptions.AgremiacaoParenthesesValues
@@ -259,6 +273,9 @@ export function FormFilterAgremiacao({
             sx={{ width: 150 }}
             fullWidth
             disabled={values !== undefined}
+            InputLabelProps={{
+              shrink: true,
+            }}
           >
             {
               AgremiacaoOptions.AgremiacaoOperatorsValues
@@ -404,7 +421,7 @@ export function FormFilterAgremiacao({
           <TextField
             select
             variant="outlined"
-            label="Operador"
+            label="Operador Lógico"
             name="operator"
             id="operator"
             value={formik.values["operator"]}

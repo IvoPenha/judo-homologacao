@@ -69,32 +69,33 @@ export function Listagem() {
           justifyContent: "flex-end",
           alignItems: "center",
           position: 'fixed',
-          right: 8,
+          flexDirection: 'row-reverse',
+          gap: 3,
+          right: 5,
           top: 70
         }}
       >
-        {valuesFiltered.length > 0 ? (
-          <div
+          <button
             style={{
-              color: "#4887C8",
+              color:  valuesFiltered.length > 0 ?"#4887C8" : '#ccc' ,
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              marginRight: 12,
-              cursor: "pointer",
+              background: 'transparent',
+              border: 'none',
+              cursor: valuesFiltered.length > 0 ? "pointer" : 'default'
             }}
             onClick={() => {
               setValuesFiltered([]);
               agremiacaoRoutes.postClearFilters()
               //Limpar o filtro no backend
             }}
-          >
-            <h5>Limpar Filtros</h5>
+            disabled = { !(valuesFiltered.length > 0) }
+            >
+            <h4>Limpar Filtros</h4>
             <FilterIcon />
-          </div>
-        ) : (
-          ""
-        )}
+          </button>
+        
         <GridToolbarQuickFilter
           variant="outlined"
           size="small"
@@ -132,8 +133,8 @@ export function Listagem() {
             navigate(`editar/${params.id}`, { replace: true });
           }}
           sx={{
-            transform: 'scale(1)',
-            ml: -1.5
+            transform: 'scale(.7)',
+            ml: -1.4
           }}
           >
           <EditIcon />
@@ -249,12 +250,10 @@ export function Listagem() {
       component="main"
       sx={{
         flexGrow: 1,
-        height: {xl:'83vh', lg: '80vh'},
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        paddingTop: {xs: '1rem', xl: '1.5rem'},
-        marginTop: {xs: '1.2rem', xl: '1.5rem'}
+        paddingTop: {sm: '.5rem', xl: '2.8rem', lg: '0'},
       }}
     >
       <Container maxWidth={false} >
@@ -265,7 +264,7 @@ export function Listagem() {
               <Home />
             </TabPanel>
             <TabPanel value={valueTab} index={0}>
-              <Box sx={{ width: "100%", backgroundColor: "#FFF", height: '74vh', flexGrow: 2, position: 'relative', zIndex: 2 }} >
+              <Box sx={{ width: "100%", backgroundColor: "#FFF",'@media (max-height : 800px)':{ height: '72vh' } , height: '78vh', flexGrow: 2, position: 'relative', zIndex: 2 }} >
                 {data?.itens ? (
                   <DataGrid
                     rows={
