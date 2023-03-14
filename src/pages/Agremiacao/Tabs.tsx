@@ -35,6 +35,7 @@ export function TabsAgremiacao() {
           label="Listagem"
           component={Link}
           to="/agremiacao"
+          
           sx={{
             width: 142,
             borderLeft: '1px solid #ccc',
@@ -46,7 +47,8 @@ export function TabsAgremiacao() {
             lineHeight:1.6,
             fontWeight: 500,
             letterSpacing:'0.0075em',
-            fontFamily: "Roboto"
+            fontFamily: "Roboto, sans-serif",
+            'a':{fontFamily: "Roboto"}
           }}
           color="primary"
           
@@ -64,7 +66,7 @@ export function TabsAgremiacao() {
             lineHeight:'32px',
             fontWeight: 500,
             letterSpacing:'0.0075em',
-            fontFamily: "Roboto",
+            fontFamily: "Roboto, sans-serif",
             cursor: 'default',
             pointerEvents: 'none'
             
