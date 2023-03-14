@@ -848,6 +848,9 @@ export function CadastroAgremiacao() {
                   value={formik.values["cnpj"]}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  error={
+                    formik.touched["cnpj"] && Boolean(formik.errors["cnpj"])
+                  }
                   size="small"
                   fullWidth
                   InputLabelProps={{
@@ -866,7 +869,7 @@ export function CadastroAgremiacao() {
                   label="Data CNPJ *"
                   name="dataCnpj"
                   id="dataCnpj"
-                  value={formik.values["dataCnpj"]}
+                  value={formik.values["date"] ? formatDate(formik.values["date"]) : null}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   size="small"
